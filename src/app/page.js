@@ -731,7 +731,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="text-3xl md:text-4xl mb-2 md:mb-4">"</div>
+                <div className="text-3xl md:text-4xl mb-2 md:mb-4">&quot;</div>
                 <p className="mb-3 md:mb-4 text-sm md:text-base">{testimonial.text}</p>
                 <p className="font-semibold text-base md:text-lg">{testimonial.author}</p>
                 <p className="text-xs md:text-sm text-white/70">{testimonial.type}</p>
@@ -746,7 +746,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-primary/90"></div>
         <div className="container mx-auto px-4 text-center relative z-10 text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Ready to Create Something Amazing?</h2>
-          <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">Let's discuss your vision and bring it to life</p>
+          <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">Let&quot;s discuss your vision and bring it to life</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
             <motion.button
               whileHover={{ scale: 1.05 }}
