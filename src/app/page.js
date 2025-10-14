@@ -1,12 +1,52 @@
 "use client"
 import Footers from "@/components/Footers.jsx";
 import Header from "../components/Headers.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image.js";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link.js";
 
 export default function Home() {
+  // Hero section slider images with different text content
+  const heroImages = [
+    {
+      src: "/SliderImages/slider1.jpg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
+    },
+    {
+      src: "/SliderImages/slider2.jpg",
+      alt: "Van Branding - Your Brand on the Move",
+      title: "Van Branding - Your Brand on the Move",
+      description: "Convert delivery vans and commercial vehicles into eye-catching mobile promotions that build brand awareness wherever they travel."
+    },
+    {
+      src: "/SliderImages/slider3.jpg",
+      alt: "Social event planning",
+      title: "Unipole & Hoarding - Command Attention at Key Locations",
+      description: "Dominate strategic high-visibility locations with large-scale outdoor advertising that captures attention 24/7 from pedestrians and motorists."
+    },
+    {
+      src: "/SliderImages/slider4.jpg",
+      alt: "Airport Branding - Reach Captive Audiences in Transit",
+      title: "Airport Branding - Reach Captive Audiences in Transit",
+      description: "Connect with affluent travelers and business professionals through premium airport advertising in high-footfall terminal areas."
+    },
+    {
+      src: "/SliderImages/slider5.jpg",
+      alt: "Tricycle Branding - Hyper-Local Mobile Advertising",
+      title: "Tricycle Branding - Hyper-Local Mobile Advertising",
+      description: "Leverage auto rickshaws and tricycles for cost-effective, nimble advertising that penetrates narrow streets and local neighborhoods."
+    },
+    {
+      src: "/SliderImages/slider6.jpg",
+      alt: "Wall Painting - Transform Urban Spaces into Brand Canvases",
+      title: "Wall Painting - Transform Urban Spaces into Brand Canvases",
+      description: "Turn blank walls into spectacular brand masterpieces that create lasting impressions in high-traffic urban and commercial areas."
+    }
+  ];
+
   // Main service categories overview
   const serviceCategories = [
     {
@@ -91,52 +131,128 @@ export default function Home() {
     { type: "social", image: "social2.jpeg", title: "Anniversary Gala" },
   ];
 
+  // State for image slider
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Auto slide functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
+  // Manual slide navigation
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+  };
+
   return (
     <div className="min-h-screen bg-white">
-      <div className='fixed w-full z-100'>
+      <div className='fixed w-full z-50'>
         <Header />
       </div>
 
-      {/* Hero Section with Video Background */}
+      {/* Hero Section with Image Slider Background */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
+        {/* Image Slider */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover opacity-60"
-          >
-            <source src="/videos/wedding.mp4" type="video/mp4" />
-            {/* Fallback image if video doesn't load */}
-            <Image
-              src="/hero-background.jpg"
-              alt="Elegant wedding background"
-              fill
-              className="object-cover"
-              priority
-            />
-          </video>
-          <div className="absolute inset-0 bg-black/60"></div>
+          {heroImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+              <div className="absolute inset-0 bg-black/60"></div>
+            </div>
+          ))}
         </div>
 
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 z-20 p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
+          aria-label="Previous slide"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 z-20 p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
+          aria-label="Next slide"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide 
+                  ? 'bg-white scale-125' 
+                  : 'bg-white/50 hover:bg-white/70'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Hero Content with Dynamic Text */}
         <div className="container mx-auto px-4 z-10 text-center text-white">
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Creating Unforgettable Moments
-          </motion.h1>
-          <motion.p
-            className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Perfect weddings & powerful brand experiences
-          </motion.p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentSlide}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl mx-auto"
+            >
+              <motion.h1
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+              >
+                {heroImages[currentSlide].title}
+              </motion.h1>
+              <motion.p
+                className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                {heroImages[currentSlide].description}
+              </motion.p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Buttons remain same for all slides */}
           <motion.div
             className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
@@ -374,12 +490,11 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent cursor-pointer cborder-2 border-white text-white hover:bg-white/10 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
+                className="bg-transparent cursor-pointer border-2 border-white text-white hover:bg-white/10 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
               >
                 Request a Quote
               </motion.button>
             </Link>
-
           </div>
         </div>
       </section>

@@ -32,6 +32,12 @@ const serviceCategories = [
         title: 'ARTIST MANAGEMENT',
         description: 'Comprehensive management services for artists and performers.',
         icon: '🎤'
+    },
+    {
+        id: 'advertising',
+        title: 'ADVERTISING SOLUTIONS',
+        description: 'Innovative outdoor and mobile advertising campaigns to maximize your brand visibility.',
+        icon: '📢'
     }
 ];
 
@@ -93,27 +99,27 @@ const Footers = () => {
                         <ul className="space-y-2">
                             <li>
                                 <motion.a
-                                    href="#services"
+                                    href="/our-services"
                                     className="text-gray-400 hover:text-white transition-colors"
                                     whileHover={{ x: 5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    Services
+                                    Our Services
                                 </motion.a>
                             </li>
                             <li>
                                 <motion.a
-                                    href="#workflow"
+                                    href="/advertising"
                                     className="text-gray-400 hover:text-white transition-colors"
                                     whileHover={{ x: 5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    Workflow
+                                    Advertising
                                 </motion.a>
                             </li>
                             <li>
                                 <motion.a
-                                    href="#gallery"
+                                    href="/gallery"
                                     className="text-gray-400 hover:text-white transition-colors"
                                     whileHover={{ x: 5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
@@ -123,7 +129,7 @@ const Footers = () => {
                             </li>
                             <li>
                                 <motion.a
-                                    href="#contact"
+                                    href="/contact"
                                     className="text-gray-400 hover:text-white transition-colors"
                                     whileHover={{ x: 5 }}
                                     transition={{ type: "spring", stiffness: 300 }}
@@ -227,10 +233,11 @@ const Footers = () => {
                                 </svg>
                             </motion.a>
                             <motion.a
-                                href="#"
+                                href="https://www.instagram.com/navyaeventandadvertising?igsh=eWNjN2RoaWx1b2xk"
                                 className="text-gray-500 hover:text-pink-600 transition-colors"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
+                                target="_blank"
                             >
                                 <span className="sr-only">Instagram</span>
                                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -238,10 +245,11 @@ const Footers = () => {
                                 </svg>
                             </motion.a>
                             <motion.a
-                                href="#"
+                                href="https://www.linkedin.com/company/navya-event-advertising/"
                                 className="text-gray-500 hover:text-blue-800 transition-colors"
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
+                                target="_blank"
                             >
                                 <span className="sr-only">LinkedIn</span>
                                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

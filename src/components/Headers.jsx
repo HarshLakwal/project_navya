@@ -106,6 +106,14 @@ const Header = () => {
                     <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        href="/gallery"
+                        className={`font-extrabold transition-colors ${activeLink === '/gallery' ? 'text-tertiary' : 'text-primary hover:text-tertiary'}`}
+                    >
+                        Gallery
+                    </motion.a>
+                    <motion.a
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                         href="/contact-us"
                         className={`font-extrabold transition-colors ${activeLink === '/contact-us' ? 'text-tertiary' : 'text-primary hover:text-tertiary'}`}
                     >
@@ -182,7 +190,7 @@ const Header = () => {
                             </div>
 
                             <div className="flex flex-col p-6 space-y-6 flex-grow">
-                                {['/our-services', '/advertising', '/contact-us'].map((path) => (
+                                {['/our-services', '/advertising', '/gallery', '/contact-us'].map((path) => (
                                     <motion.a
                                         key={path}
                                         href={path}
@@ -193,6 +201,7 @@ const Header = () => {
                                     >
                                         {path === '/our-services' && 'Our Services'}
                                         {path === '/advertising' && 'Advertising'}
+                                        {path === '/gallery' && 'Gallery'}
                                         {path === '/contact-us' && 'Contact'}
                                     </motion.a>
                                 ))}
