@@ -44,7 +44,13 @@ export default function Home() {
       alt: "Wall Painting - Transform Urban Spaces into Brand Canvases",
       title: "Wall Painting - Transform Urban Spaces into Brand Canvases",
       description: "Turn blank walls into spectacular brand masterpieces that create lasting impressions in high-traffic urban and commercial areas."
-    }
+    },
+     {
+      src: "/SliderImages/slider7.jpeg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
+    },
   ];
 
   // Main service categories overview
