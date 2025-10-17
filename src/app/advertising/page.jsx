@@ -103,7 +103,7 @@ const detailedServices = [
   },
   {
     title: "Tricycle Advertising",
-    image: "/services/mobile-van.jpeg",
+    image: "/advertising/tricycle3.jpeg",
     description: [
       "Tricycle advertising, also known as mobile billboard advertising using tricycles, can offer several benefits for businesses looking to promote their products or services. Tricycle advertising effectiveness depends on factors such as the design of the advertisement, the choice of routes, and the specific target audience."
     ]
