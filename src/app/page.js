@@ -130,7 +130,7 @@ export default function Home() {
     { type: "wedding", image: "wedding1.jpeg", title: "Luxury Royal Wedding" },
     { type: "wedding", image: "wedding2.jpeg", title: "Garden Destination Wedding" },
     { type: "advertising", image: "ad1.jpeg", title: "Brand Campaign - Doodle" },
-    { type: "advertising", image: "ad2.jpeg", title: "Vehicle Branding - Beverage Company" },
+    { type: "advertising", image: "ad2.jpeg", title: "Vehicle Branding - Dinosaur World" },
     { type: "corporate", image: "corporate1.jpg", title: "Nikon Event" },
     { type: "corporate", image: "corporate2.jpg", title: "Product Launch Event" },
     { type: "social", image: "social1.jpg", title: "Milestone Birthday Celebration" },

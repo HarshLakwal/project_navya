@@ -156,7 +156,7 @@ const detailedServices = [
   },
   {
     title: "Airport Branding",
-    image: "https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80",
+    image: "/SliderImages/slider4.jpg",
     description: [
       "Airport advertising involves promoting products, services, or brands within airport facilities to reach a diverse and captive audience. Airports provide a unique environment where advertisers can engage with travelers who often have time to spare before their flights.",
       "International airport branding offers premium exposure to a global audience with high disposable income, making it ideal for luxury brands and international services."
@@ -164,7 +164,7 @@ const detailedServices = [
   },
   {
     title: "International Cricket Branding",
-    image: "/advertising/cricket.webp",
+    image: "/advertising/cricket1.webp",
     description: [
       "Cricket stadium advertising involves promoting products, services, or brands within the confines of cricket stadiums during matches or events. This type of advertising allows businesses to reach a captive audience of fans who are physically present to watch the game.",
       "With millions watching both in-stadium and on television, cricket branding offers massive visibility and brand recall, especially during high-profile international matches and tournaments."
@@ -188,7 +188,7 @@ const detailedServices = [
   },
   {
     title: "Radio Campaign Advertising",
-    image: "/advertising/radio.jpg",
+    image: "/advertising/radio_mirchi1.jpeg",
     description: [
       "Radio campaign advertising involves promoting products, services, or messages through radio broadcasts. This form of advertising has several benefits and can be an effective way to reach a diverse audience.",
       "We partner with leading radio stations including 92.7 BIG FM, 93.5 RED FM, 94.3 MY FM, 98.3 MIRCHI, and many more to ensure your message reaches the right audience at the right time."
@@ -637,7 +637,7 @@ const CompanyProfile = () => {
                     "Manappuram Gold Loan", "Chings Pasta", "Porter", "Rainbow Raincoat", "Victory Raincoat",
                     "Ram Bandhu", "Shankara Eye", "Agarwal Eye", "ASG Eye", "Khandelwal Suzuki", "Raj Suzuki",
                     "Sudhakar Pipe", "Zebronics", "Bajaj Finance", "Navratan Cool Talk", "Unipath Lab",
-                    "Winner Coaching", "Sangam Steel", "Symphony Cooler", "Symbiosis University", "Wama Oil",
+                    "Winner Coaching", "Sangam Steel", "Symphony Cooler", "Symbiosis University", "Vama Oil",
                     "TBZ Jewellery", "Taco Bell", "Wow Momos", "Snow City Indore", "Snow Hills Jaipur",
                     "Aditya Birla Group", "SBI Life", "Vivo", "Croma", "Reliance Trends", "ICICI Bank",
                     "RSWS", "Oriental University", "Prestige University", "Poliraj Pipe", "Orra Jewellery",
