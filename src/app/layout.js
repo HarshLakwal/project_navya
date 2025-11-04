@@ -121,9 +121,9 @@ export default function RootLayout({ children }) {
               "email": "info@navyaadvertising.com",
               "address": {
                 "@type": "PostalAddress",
-                "addressLocality": "Your City",
-                "addressRegion": "Your State",
-                "postalCode": "Your PIN",
+                "addressLocality": "Indore",
+                "addressRegion": "MP",
+                "postalCode": "452001",
                 "addressCountry": "IN"
               },
               "geo": {
@@ -146,7 +146,7 @@ export default function RootLayout({ children }) {
                 "Brand Activation",
                 "Artist Management"
               ],
-              "areaServed": ["Your City", "Your State", "India"],
+              "areaServed": ["Indore", "MP", "India"],
               "sameAs": [
                 "https://www.facebook.com/navyaadvertising",
                 "https://www.instagram.com/navyaadvertising",
@@ -170,10 +170,10 @@ export default function RootLayout({ children }) {
               "telephone": "+91-XXXXXXXXXX",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Your Street Address",
-                "addressLocality": "Your City",
-                "addressRegion": "Your State",
-                "postalCode": "Your PIN",
+                "streetAddress": "Office No. 404, The Heritage, 582 Mahatma Gandhi Rd",
+                "addressLocality": "Indore",
+                "addressRegion": "MP",
+                "postalCode": "452001",
                 "addressCountry": "IN"
               },
               "geo": {
@@ -207,8 +207,8 @@ export default function RootLayout({ children }) {
         {/* Favicon Links */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
         <link rel="manifest" href="/site.webmanifest" />
         
         {/* Preconnect to important domains */}

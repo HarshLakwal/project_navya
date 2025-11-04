@@ -34,8 +34,6 @@ const ModernGallery = () => {
     "Unipoles & Hoardings",
     "Corporate Event Production",
     "Printing Segment Work",
-    "Stationery Printing",
-    "Corporate Brochures",
     "Leaflets & Pamphlets",
     "Flex Banners & Hoardings",
     "Backdrops, Standees & Kiosks",
@@ -163,19 +161,6 @@ const ModernGallery = () => {
     },
     {
       id: 10,
-      title: "Corporate Branding",
-      description: "Professional brochure design",
-      category: "advertising",
-      subCategory: "Corporate Brochures",
-      photos: [
-        { id: 1, src: "/advertising/corporate_branding1.webp", alt: "Corporate Brochure 1" },
-        { id: 2, src: "/advertising/corporate_branding2.webp", alt: "Corporate Brochure 2" },
-        { id: 3, src: "/advertising/corporate_branding3.webp", alt: "Corporate Brochure 3" },
-        { id: 4, src: "/advertising/corporate_branding4.webp", alt: "Corporate Brochure 4" }
-      ]
-    },
-    {
-      id: 11,
       title: "Van Canter Campaign",
       description: "Mobile van advertising solutions",
       category: "advertising",
@@ -188,7 +173,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 12,
+      id: 11,
       title: "Multiplex Advertising",
       description: "Cinema and multiplex branding",
       category: "advertising",
@@ -201,7 +186,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 13,
+      id: 12,
       title: "Bus TV Advertising",
       description: "Chartered bus television campaigns",
       category: "advertising",
@@ -214,7 +199,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 14,
+      id: 13,
       title: "In-Shop Branding",
       description: "Retail store branding solutions",
       category: "advertising",
@@ -227,7 +212,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 15,
+      id: 14,
       title: "Exhibition Stalls",
       description: "Creative exhibition booth designs",
       category: "advertising",
@@ -240,7 +225,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 16,
+      id: 15,
       title: "Hoarding Campaign",
       description: "Large format outdoor advertising",
       category: "advertising",
@@ -253,7 +238,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 17,
+      id: 16,
       title: "Corporate Events",
       description: "Professional event production",
       category: "advertising",
@@ -266,7 +251,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 18,
+      id: 17,
       title: "Printing Services",
       description: "Professional printing solutions",
       category: "advertising",
@@ -279,20 +264,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 19,
-      title: "Stationery Design",
-      description: "Corporate stationery printing",
-      category: "advertising",
-      subCategory: "Stationery Printing",
-      photos: [
-        { id: 1, src: "/advertising/stationery1.jpeg", alt: "Stationery 1" },
-        { id: 2, src: "/advertising/stationery2.jpeg", alt: "Stationery 2" },
-        { id: 3, src: "/advertising/stationery3.jpeg", alt: "Stationery 3" },
-        { id: 4, src: "/advertising/stationery4.jpeg", alt: "Stationery 4" }
-      ]
-    },
-    {
-      id: 20,
+      id: 18,
       title: "Leaflet Distribution",
       description: "Marketing leaflets and pamphlets",
       category: "advertising",
@@ -305,7 +277,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 21,
+      id: 19,
       title: "Flex Banner Campaign",
       description: "Outdoor flex banner advertising",
       category: "advertising",
@@ -318,7 +290,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 22,
+      id: 20,
       title: "Event Backdrops",
       description: "Professional backdrop and standee solutions",
       category: "advertising",
@@ -331,7 +303,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 23,
+      id: 21,
       title: "Parking Solutions",
       description: "No parking boards and signage",
       category: "advertising",
@@ -344,7 +316,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 24,
+      id: 22,
       title: "E-Rickshaw Advertising",
       description: "Chroma advertising on E-Rickshaw",
       category: "advertising",
@@ -358,7 +330,7 @@ const ModernGallery = () => {
     },
     // Events category (single photo projects)
     {
-      id: 25,
+      id: 23,
       title: "Product Launch Event",
       description: "Successful product launch with 500+ attendees",
       category: "events",
@@ -367,7 +339,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 26,
+      id: 24,
       title: "Corporate Conference",
       description: "Annual corporate conference 2024",
       category: "events",
@@ -376,7 +348,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 27,
+      id: 25,
       title: "Charity Gala Night",
       description: "Fundraising event for local community",
       category: "events",
@@ -385,7 +357,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 28,
+      id: 26,
       title: "Tech Summit 2024",
       description: "Leading technology conference",
       category: "events",
@@ -394,7 +366,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 29,
+      id: 27,
       title: "10th Birthday Bash",
       description: "Memorable birthday celebration event",
       category: "events",
@@ -403,7 +375,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 30,
+      id: 28,
       title: "Music Festival",
       description: "3-day outdoor music festival",
       category: "events",
@@ -412,7 +384,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 31,
+      id: 29,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -421,7 +393,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 32,
+      id: 30,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -430,7 +402,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 33,
+      id: 31,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -439,7 +411,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 34,
+      id: 32,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -448,7 +420,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 35,
+      id: 33,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -457,7 +429,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 36,
+      id: 34,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -466,7 +438,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 37,
+      id: 35,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -475,7 +447,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 38,
+      id: 36,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -484,7 +456,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 39,
+      id: 37,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -493,7 +465,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 40,
+      id: 38,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -502,7 +474,7 @@ const ModernGallery = () => {
       ]
     },
      {
-      id: 41,
+      id: 39,
       title: "Wedding Decor",
       description: "",
       category: "events",
