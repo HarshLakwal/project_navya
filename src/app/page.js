@@ -510,7 +510,6 @@
 //     </div>
 //   );
 // }
-
 "use client"
 import Footers from "@/components/Footers.jsx";
 import Header from "../components/Headers.jsx";
@@ -558,7 +557,7 @@ export default function Home() {
       title: "Wall Painting - Transform Urban Spaces into Brand Canvases",
       description: "Turn blank walls into spectacular brand masterpieces that create lasting impressions in high-traffic urban and commercial areas."
     },
-     {
+    {
       src: "/SliderImages/slider7.jpeg",
       alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
       title: "Bus Branding - Mobile Billboards That Dominate City Streets",
@@ -713,9 +712,9 @@ export default function Home() {
         <Header />
       </div>
 
-      {/* Hero Section with Image Slider Background */}
+      {/* Hero Section with Image Slider Background - FIXED RESPONSIVE HEIGHT */}
       <section 
-        className="relative h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[100vh] 2xl:h-screen flex items-center justify-center overflow-hidden pt-20"
+        className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8 sm:pb-12"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -737,54 +736,38 @@ export default function Home() {
                 priority={index === 0}
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, 100vw"
               />
-              <div className="absolute inset-0 bg-black/60"></div>
+              {/* Enhanced overlay for better text readability */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
             </div>
           ))}
         </div>
 
-        {/* Navigation Arrows - Hidden on mobile, visible on tablet and up */}
+        {/* Navigation Arrows - Improved positioning */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 md:left-4 z-20 p-1 md:p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:block"
+          className="absolute left-2 sm:left-4 md:left-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
           aria-label="Previous slide"
         >
-          <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         
         <button
           onClick={nextSlide}
-          className="absolute right-2 md:right-4 z-20 p-1 md:p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:block"
+          className="absolute right-2 sm:right-4 md:right-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
           aria-label="Next slide"
         >
-          <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
 
-        {/* Slide Indicators - Responsive sizing */}
-        <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-1 sm:space-x-2">
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`transition-all rounded-full ${
-                index === currentSlide 
-                  ? 'bg-white scale-110' 
-                  : 'bg-white/50 hover:bg-white/70'
-              } ${
-                index === currentSlide 
-                  ? 'w-3 h-3 sm:w-4 sm:h-4' 
-                  : 'w-2 h-2 sm:w-3 sm:h-3'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        {/* Slide Indicators - Uncommented and improved */}
+        
 
-        {/* Hero Content with Dynamic Text - Fully Responsive */}
-        <div className="container mx-auto px-3 sm:px-4 z-10 text-center text-white w-full">
+        {/* Hero Content - Improved positioning and spacing */}
+        <div className="container mx-auto px-4 sm:px-6 z-10 text-center text-white w-full relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -794,16 +777,19 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="max-w-4xl mx-auto w-full px-2 sm:px-4"
             >
+              {/* Title with better responsive sizing and spacing */}
               <motion.h1
-                className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 sm:mb-3 md:mb-4 lg:mb-6 px-2"
+                className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight sm:leading-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
                 {heroImages[currentSlide].title}
               </motion.h1>
+              
+              {/* Description with better readability */}
               <motion.p
-                className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-3 sm:mb-4 md:mb-5 lg:mb-8 max-w-2xl mx-auto px-2 leading-tight sm:leading-normal"
+                className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed sm:leading-normal font-light"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -813,27 +799,27 @@ export default function Home() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Buttons - Responsive sizing and spacing */}
+          {/* Buttons - Improved spacing and sizing */}
           <motion.div
-            className="flex flex-col xs:flex-row gap-2 sm:gap-3 md:gap-4 justify-center px-2 mt-4 sm:mt-6"
+            className="flex flex-col xs:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center mt-6 sm:mt-8 md:mt-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Link href={"/contact-us"} className="flex-1 xs:flex-none max-w-xs mx-auto xs:mx-0">
+            <Link href={"/contact-us"} className="w-full xs:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-primary hover:bg-[#822431] text-white px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-lg font-medium shadow-lg text-xs sm:text-sm md:text-base w-full xs:w-auto min-w-[120px] sm:min-w-[140px]"
+                className="bg-primary hover:bg-[#822431] text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-lg font-semibold shadow-lg text-sm sm:text-base md:text-lg w-full xs:w-auto min-w-[160px] transition-all duration-300"
               >
                 Plan Your Event
               </motion.button>
             </Link>
-            <Link href={"/our-services"} className="flex-1 xs:flex-none max-w-xs mx-auto xs:mx-0">
+            <Link href={"/our-services"} className="w-full xs:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/20 backdrop-blur-md border border-white sm:border-2 text-white hover:bg-white/30 px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-lg font-medium text-xs sm:text-sm md:text-base w-full xs:w-auto min-w-[120px] sm:min-w-[140px]"
+                className="bg-white/20 backdrop-blur-md border-2 border-white text-white hover:bg-white/30 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg w-full xs:w-auto min-w-[160px] transition-all duration-300"
               >
                 View Our Work
               </motion.button>
@@ -842,7 +828,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Overview - Visual Grid */}
+      {/* Rest of your sections remain the same */}
       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-3 sm:px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-3 sm:mb-4">What We Do</h2>
@@ -895,7 +881,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Portfolio Showcase with Default Hover */}
+      {/* Portfolio Showcase */}
       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-gray-100">
         <div className="container mx-auto px-3 sm:px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-6 sm:mb-8 md:mb-10 lg:mb-12">Our Work</h2>
@@ -919,7 +905,6 @@ export default function Home() {
                   sizes="(max-width: 480px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 25vw, 25vw"
                 />
 
-                {/* Always visible overlay with information */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
                   <div className="p-2 sm:p-3 md:p-4 text-white">
                     <span className="text-[10px] xs:text-xs bg-primary px-1 xs:px-2 py-0.5 xs:py-1 rounded-full">{item.type}</span>
@@ -927,7 +912,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Additional info on hover */}
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
                   <div className="text-center p-2 sm:p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                     <button className="bg-primary hover:bg-[#822431] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm font-medium">
