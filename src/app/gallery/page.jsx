@@ -320,7 +320,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 21,
+      id: 22,
       title: "Internal Bus Branding",
       description: "Internal Bus Branding",
       category: "advertising",
@@ -335,7 +335,7 @@ const ModernGallery = () => {
 
     // Events category (single photo projects)
     {
-      id: 22,
+      id: 23,
       title: "Product Launch Event",
       description: "Successful product launch with 500+ attendees",
       category: "events",
@@ -344,7 +344,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 23,
+      id: 24,
       title: "Corporate Conference",
       description: "Annual corporate conference 2024",
       category: "events",
@@ -353,7 +353,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 24,
+      id: 25,
       title: "Charity Gala Night",
       description: "Fundraising event for local community",
       category: "events",
@@ -362,7 +362,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 25,
+      id: 26,
       title: "Tech Summit 2024",
       description: "Leading technology conference",
       category: "events",
@@ -371,7 +371,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 26,
+      id: 27,
       title: "10th Birthday Bash",
       description: "Memorable birthday celebration event",
       category: "events",
@@ -380,7 +380,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 27,
+      id: 28,
       title: "Music Festival",
       description: "3-day outdoor music festival",
       category: "events",
@@ -389,7 +389,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 28,
+      id: 29,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -398,7 +398,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 29,
+      id: 30,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -407,7 +407,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 30,
+      id: 31,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -416,7 +416,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 31,
+      id: 32,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -425,7 +425,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 32,
+      id: 33,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -434,7 +434,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 33,
+      id: 34,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -443,7 +443,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 34,
+      id: 35,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -452,7 +452,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 35,
+      id: 36,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -461,7 +461,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 36,
+      id: 37,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -470,7 +470,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 37,
+      id: 38,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -479,7 +479,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 38,
+      id: 39,
       title: "Wedding Decor",
       description: "",
       category: "events",
