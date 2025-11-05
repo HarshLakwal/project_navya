@@ -35,9 +35,9 @@ const ModernGallery = () => {
     "Corporate Event Production",
     "Printing Segment Work",
     "Leaflets & Pamphlets",
-    "Flex Banners & Hoardings",
     "Backdrops, Standees & Kiosks",
-    "No Parking Boards"
+    "No Parking Boards",
+    "Internal Bus Branding"
   ];
 
   // Updated Gallery data with multiple photos per project
@@ -192,10 +192,10 @@ const ModernGallery = () => {
       category: "advertising",
       subCategory: "Chartered Bus TV Advertising",
       photos: [
-        { id: 1, src: "/advertising/bus_tv1.jpeg", alt: "Bus TV Screen 1" },
-        { id: 2, src: "/advertising/bus_tv2.avif", alt: "Bus TV Screen 2" },
-        { id: 3, src: "/advertising/bus_tv3.avif", alt: "Bus TV Screen 3" },
-        { id: 4, src: "/advertising/bus_tv4.avif", alt: "Bus TV Screen 4" }
+        { id: 1, src: "/advertising/bus_tv3.jpeg", alt: "Bus TV Screen 1" },
+        { id: 2, src: "/advertising/bus_tv2.jpeg", alt: "Bus TV Screen 2" },
+        { id: 3, src: "/advertising/bus_tv1.jpeg", alt: "Bus TV Screen 3" },
+        { id: 4, src: "/advertising/bus_tv4.jpeg", alt: "Bus TV Screen 4" }
       ]
     },
     {
@@ -234,7 +234,11 @@ const ModernGallery = () => {
         { id: 1, src: "/advertising/hoarding1.jpeg", alt: "Hoarding 1" },
         { id: 2, src: "/advertising/hoarding2.jpeg", alt: "Hoarding 2" },
         { id: 3, src: "/advertising/hoarding3.jpeg", alt: "Hoarding 3" },
-        { id: 4, src: "/advertising/hoarding4.jpeg", alt: "Hoarding 4" }
+        { id: 4, src: "/advertising/hoarding4.jpeg", alt: "Hoarding 4" },
+        { id: 5, src: "/advertising/flex_banner1.jpeg", alt: "Flex Banner 1" },
+        { id: 6, src: "/advertising/flex_banner2.jpeg", alt: "Flex Banner 2" },
+        { id: 7, src: "/advertising/flex_banner3.jpeg", alt: "Flex Banner 3" },
+        { id: 8, src: "/advertising/flex_banner4.jpeg", alt: "Flex Banner 4" }
       ]
     },
     {
@@ -278,19 +282,6 @@ const ModernGallery = () => {
     },
     {
       id: 19,
-      title: "Flex Banner Campaign",
-      description: "Outdoor flex banner advertising",
-      category: "advertising",
-      subCategory: "Flex Banners & Hoardings",
-      photos: [
-        { id: 1, src: "/advertising/flex_banner1.jpeg", alt: "Flex Banner 1" },
-        { id: 2, src: "/advertising/flex_banner2.jpeg", alt: "Flex Banner 2" },
-        { id: 3, src: "/advertising/flex_banner3.jpeg", alt: "Flex Banner 3" },
-        { id: 4, src: "/advertising/flex_banner4.jpeg", alt: "Flex Banner 4" }
-      ]
-    },
-    {
-      id: 20,
       title: "Event Backdrops",
       description: "Professional backdrop and standee solutions",
       category: "advertising",
@@ -303,7 +294,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 21,
+      id: 20,
       title: "Parking Solutions",
       description: "No parking boards and signage",
       category: "advertising",
@@ -316,7 +307,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 22,
+      id: 21,
       title: "E-Rickshaw Advertising",
       description: "Chroma advertising on E-Rickshaw",
       category: "advertising",
@@ -328,9 +319,23 @@ const ModernGallery = () => {
         { id: 4, src: "/advertising/e_rickshaw4.jpeg", alt: "E-Rickshaw Detail" }
       ]
     },
+    {
+      id: 21,
+      title: "Internal Bus Branding",
+      description: "Internal Bus Branding",
+      category: "advertising",
+      subCategory: "Internal Bus Branding",
+      photos: [
+        { id: 1, src: "/advertising/internal_bus_branding1.jpeg", alt: "E-Rickshaw Front" },
+        { id: 2, src: "/advertising/internal_bus_branding2.jpeg", alt: "E-Rickshaw Side" },
+        { id: 3, src: "/advertising/internal_bus_branding3.jpeg", alt: "E-Rickshaw Back" },
+        { id: 4, src: "/advertising/internal_bus_branding4.jpeg", alt: "E-Rickshaw Detail" }
+      ]
+    },
+
     // Events category (single photo projects)
     {
-      id: 23,
+      id: 22,
       title: "Product Launch Event",
       description: "Successful product launch with 500+ attendees",
       category: "events",
@@ -339,7 +344,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 24,
+      id: 23,
       title: "Corporate Conference",
       description: "Annual corporate conference 2024",
       category: "events",
@@ -348,7 +353,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 25,
+      id: 24,
       title: "Charity Gala Night",
       description: "Fundraising event for local community",
       category: "events",
@@ -357,7 +362,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 26,
+      id: 25,
       title: "Tech Summit 2024",
       description: "Leading technology conference",
       category: "events",
@@ -366,7 +371,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 27,
+      id: 26,
       title: "10th Birthday Bash",
       description: "Memorable birthday celebration event",
       category: "events",
@@ -375,7 +380,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 28,
+      id: 27,
       title: "Music Festival",
       description: "3-day outdoor music festival",
       category: "events",
@@ -384,7 +389,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 29,
+      id: 28,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -392,8 +397,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event1.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 30,
+    {
+      id: 29,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -401,8 +406,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event2.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 31,
+    {
+      id: 30,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -410,8 +415,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event3.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 32,
+    {
+      id: 31,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -419,8 +424,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event4.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 33,
+    {
+      id: 32,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -428,8 +433,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event5.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 34,
+    {
+      id: 33,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -437,8 +442,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event6.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 35,
+    {
+      id: 34,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -446,8 +451,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event7.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 36,
+    {
+      id: 35,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -455,8 +460,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event8.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 37,
+    {
+      id: 36,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -464,8 +469,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event9.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 38,
+    {
+      id: 37,
       title: "Wedding Decor",
       description: "",
       category: "events",
@@ -473,8 +478,8 @@ const ModernGallery = () => {
         { id: 1, src: "/events/wedding_event10.jpeg", alt: "wedding decor" }
       ]
     },
-     {
-      id: 39,
+    {
+      id: 38,
       title: "Wedding Decor",
       description: "",
       category: "events",
