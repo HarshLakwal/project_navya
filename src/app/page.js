@@ -201,7 +201,7 @@
 //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
 //           </svg>
 //         </button>
-        
+
 //         <button
 //           onClick={nextSlide}
 //           className="absolute right-4 z-20 p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
@@ -713,7 +713,7 @@ export default function Home() {
       </div>
 
       {/* Hero Section with Image Slider Background - FIXED RESPONSIVE HEIGHT */}
-      <section 
+      <section
         className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8 sm:pb-12"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
@@ -724,9 +724,8 @@ export default function Home() {
           {heroImages.map((image, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <Image
                 src={image.src}
@@ -752,7 +751,7 @@ export default function Home() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        
+
         <button
           onClick={nextSlide}
           className="absolute right-2 sm:right-4 md:right-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
@@ -764,7 +763,7 @@ export default function Home() {
         </button>
 
         {/* Slide Indicators - Uncommented and improved */}
-        
+
 
         {/* Hero Content - Improved positioning and spacing */}
         <div className="container mx-auto px-4 sm:px-6 z-10 text-center text-white w-full relative">
@@ -786,7 +785,7 @@ export default function Home() {
               >
                 {heroImages[currentSlide].title}
               </motion.h1>
-              
+
               {/* Description with better readability */}
               <motion.p
                 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed sm:leading-normal font-light"
@@ -801,25 +800,25 @@ export default function Home() {
 
           {/* Buttons - Improved spacing and sizing */}
           <motion.div
-            className="flex flex-col xs:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center mt-6 sm:mt-8 md:mt-10"
+            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <Link href={"/contact-us"} className="w-full xs:w-auto">
+            <Link href={"/contact-us"}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-primary hover:bg-[#822431] text-white px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-lg font-semibold shadow-lg text-sm sm:text-base md:text-lg w-full xs:w-auto min-w-[160px] transition-all duration-300"
+                className="bg-primary hover:bg-[#822431] text-white px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium shadow-lg text-base md:text-lg"
               >
                 Plan Your Event
               </motion.button>
             </Link>
-            <Link href={"/our-services"} className="w-full xs:w-auto">
+            <Link href={"/our-services"}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/20 backdrop-blur-md border-2 border-white text-white hover:bg-white/30 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-4 rounded-lg font-semibold text-sm sm:text-base md:text-lg w-full xs:w-auto min-w-[160px] transition-all duration-300"
+                className="bg-white/20 backdrop-blur-md border-2 border-white text-white hover:bg-white/30 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
               >
                 View Our Work
               </motion.button>
@@ -1024,12 +1023,12 @@ export default function Home() {
         <div className="container mx-auto px-3 sm:px-4 text-center relative z-10 text-white">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">Ready to Create Something Amazing?</h2>
           <p className="text-base sm:text-lg md:text-xl mb-4 sm:mb-5 md:mb-6 lg:mb-8 max-w-2xl mx-auto">Let&apos;s discuss your vision and bring it to life</p>
-          <div className="flex flex-col xs:flex-row justify-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
             <Link href={"/contact-us"}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary cursor-pointer hover:bg-gray-100 px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-lg font-medium shadow-lg text-xs sm:text-sm md:text-base w-full xs:w-auto min-w-[140px]"
+                className="bg-white text-primary cursor-pointer hover:bg-gray-100 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium shadow-lg text-base md:text-lg"
               >
                 Start Planning
               </motion.button>
@@ -1038,7 +1037,7 @@ export default function Home() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent cursor-pointer border border-white sm:border-2 text-white hover:bg-white/10 px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-lg font-medium text-xs sm:text-sm md:text-base w-full xs:w-auto min-w-[140px]"
+                className="bg-transparent cursor-pointer border-2 border-white text-white hover:bg-white/10 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
               >
                 Request a Quote
               </motion.button>
