@@ -45,7 +45,7 @@
 //       title: "Wall Painting - Transform Urban Spaces into Brand Canvases",
 //       description: "Turn blank walls into spectacular brand masterpieces that create lasting impressions in high-traffic urban and commercial areas."
 //     },
-//      {
+//     {
 //       src: "/SliderImages/slider7.jpeg",
 //       alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
 //       title: "Bus Branding - Mobile Billboards That Dominate City Streets",
@@ -139,27 +139,59 @@
 
 //   // State for image slider
 //   const [currentSlide, setCurrentSlide] = useState(0);
+//   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
 //   // Auto slide functionality
 //   useEffect(() => {
+//     if (!isAutoPlaying) return;
+
 //     const interval = setInterval(() => {
 //       setCurrentSlide((prev) => (prev + 1) % heroImages.length);
 //     }, 5000); // Change slide every 5 seconds
 
 //     return () => clearInterval(interval);
-//   }, [heroImages.length]);
+//   }, [heroImages.length, isAutoPlaying]);
 
 //   // Manual slide navigation
 //   const goToSlide = (index) => {
 //     setCurrentSlide(index);
+//     setIsAutoPlaying(false);
+//     setTimeout(() => setIsAutoPlaying(true), 10000); // Resume auto-play after 10 seconds
 //   };
 
 //   const nextSlide = () => {
 //     setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+//     setIsAutoPlaying(false);
+//     setTimeout(() => setIsAutoPlaying(true), 10000);
 //   };
 
 //   const prevSlide = () => {
 //     setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length);
+//     setIsAutoPlaying(false);
+//     setTimeout(() => setIsAutoPlaying(true), 10000);
+//   };
+
+//   // Touch swipe functionality
+//   const [touchStart, setTouchStart] = useState(null);
+//   const [touchEnd, setTouchEnd] = useState(null);
+
+//   const minSwipeDistance = 50;
+
+//   const onTouchStart = (e) => {
+//     setTouchEnd(null);
+//     setTouchStart(e.targetTouches[0].clientX);
+//   };
+
+//   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+//   const onTouchEnd = () => {
+//     if (!touchStart || !touchEnd) return;
+//     const distance = touchStart - touchEnd;
+//     const isLeftSwipe = distance > minSwipeDistance;
+//     const isRightSwipe = distance < -minSwipeDistance;
+
+//     if (isLeftSwipe) nextSlide();
+//     if (isRightSwipe) prevSlide();
 //   };
 
 //   return (
@@ -168,16 +200,20 @@
 //         <Header />
 //       </div>
 
-//       {/* Hero Section with Image Slider Background */}
-//       <section className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
+//       {/* Hero Section with Image Slider Background - FIXED RESPONSIVE HEIGHT */}
+//       <section
+//         className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8 sm:pb-12"
+//         onTouchStart={onTouchStart}
+//         onTouchMove={onTouchMove}
+//         onTouchEnd={onTouchEnd}
+//       >
 //         {/* Image Slider */}
 //         <div className="absolute inset-0 z-0">
 //           {heroImages.map((image, index) => (
 //             <div
 //               key={index}
-//               className={`absolute inset-0 transition-opacity duration-1000 ${
-//                 index === currentSlide ? 'opacity-100' : 'opacity-0'
-//               }`}
+//               className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+//                 }`}
 //             >
 //               <Image
 //                 src={image.src}
@@ -185,51 +221,40 @@
 //                 fill
 //                 className="object-cover"
 //                 priority={index === 0}
+//                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, 100vw"
 //               />
-//               <div className="absolute inset-0 bg-black/60"></div>
+//               {/* Enhanced overlay for better text readability */}
+//               <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
 //             </div>
 //           ))}
 //         </div>
 
-//         {/* Navigation Arrows */}
+//         {/* Navigation Arrows - Improved positioning */}
 //         <button
 //           onClick={prevSlide}
-//           className="absolute left-4 z-20 p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
+//           className="absolute left-2 sm:left-4 md:left-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
 //           aria-label="Previous slide"
 //         >
-//           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//           <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
 //           </svg>
 //         </button>
 
 //         <button
 //           onClick={nextSlide}
-//           className="absolute right-4 z-20 p-2 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors"
+//           className="absolute right-2 sm:right-4 md:right-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
 //           aria-label="Next slide"
 //         >
-//           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+//           <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
 //           </svg>
 //         </button>
 
-//         {/* Slide Indicators */}
-//         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
-//           {heroImages.map((_, index) => (
-//             <button
-//               key={index}
-//               onClick={() => goToSlide(index)}
-//               className={`w-3 h-3 rounded-full transition-all ${
-//                 index === currentSlide 
-//                   ? 'bg-white scale-125' 
-//                   : 'bg-white/50 hover:bg-white/70'
-//               }`}
-//               aria-label={`Go to slide ${index + 1}`}
-//             />
-//           ))}
-//         </div>
+//         {/* Slide Indicators - Uncommented and improved */}
 
-//         {/* Hero Content with Dynamic Text */}
-//         <div className="container mx-auto px-4 z-10 text-center text-white">
+
+//         {/* Hero Content - Improved positioning and spacing */}
+//         <div className="container mx-auto px-4 sm:px-6 z-10 text-center text-white w-full relative">
 //           <AnimatePresence mode="wait">
 //             <motion.div
 //               key={currentSlide}
@@ -237,18 +262,21 @@
 //               animate={{ opacity: 1, y: 0 }}
 //               exit={{ opacity: 0, y: -20 }}
 //               transition={{ duration: 0.8 }}
-//               className="max-w-4xl mx-auto"
+//               className="max-w-4xl mx-auto w-full px-2 sm:px-4"
 //             >
+//               {/* Title with better responsive sizing and spacing */}
 //               <motion.h1
-//                 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6"
+//                 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight sm:leading-normal"
 //                 initial={{ opacity: 0, y: 20 }}
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.8, delay: 0.1 }}
 //               >
 //                 {heroImages[currentSlide].title}
 //               </motion.h1>
+
+//               {/* Description with better readability */}
 //               <motion.p
-//                 className="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-2xl mx-auto"
+//                 className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed sm:leading-normal font-light"
 //                 initial={{ opacity: 0, y: 20 }}
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -258,7 +286,7 @@
 //             </motion.div>
 //           </AnimatePresence>
 
-//           {/* Buttons remain same for all slides */}
+//           {/* Buttons - Improved spacing and sizing */}
 //           <motion.div
 //             className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
 //             initial={{ opacity: 0, y: 20 }}
@@ -287,19 +315,19 @@
 //         </div>
 //       </section>
 
-//       {/* Services Overview - Visual Grid */}
-//       <section className="py-12 md:py-16 bg-white">
-//         <div className="container mx-auto px-4">
-//           <h2 className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-4">What We Do</h2>
-//           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8 md:mb-12 text-sm md:text-base">
+//       {/* Rest of your sections remain the same */}
+//       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
+//         <div className="container mx-auto px-3 sm:px-4">
+//           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-3 sm:mb-4">What We Do</h2>
+//           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-xs sm:text-sm md:text-base px-2">
 //             We create memorable experiences through exceptional event planning and innovative advertising solutions
 //           </p>
 
-//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
 //             {serviceCategories.map((service, index) => (
 //               <motion.div
 //                 key={index}
-//                 className="relative group overflow-hidden rounded-xl md:rounded-2xl shadow-lg h-72 sm:h-80 md:h-96 cursor-pointer"
+//                 className="relative group overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 cursor-pointer"
 //                 whileHover="hover"
 //                 initial={{ opacity: 0, y: 20 }}
 //                 whileInView={{ opacity: 1, y: 0 }}
@@ -321,16 +349,17 @@
 //                       fill
 //                       className="object-cover"
 //                       priority
+//                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
 //                     />
 //                   </video>
 //                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 //                 </div>
 
-//                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-//                   <div className="transform transition-transform duration-500 group-hover:-translate-y-2">
-//                     <span className="text-3xl md:text-4xl mb-1 md:mb-2 inline-block">{service.icon}</span>
-//                     <h3 className="text-xl md:text-2xl font-bold mb-1 md:mb-2">{service.title}</h3>
-//                     <p className="text-gray-200 text-sm md:text-base">{service.description}</p>
+//                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6 text-white">
+//                   <div className="transform transition-transform duration-500 group-hover:-translate-y-1 sm:group-hover:-translate-y-2">
+//                     <span className="text-2xl sm:text-3xl md:text-4xl mb-1 inline-block">{service.icon}</span>
+//                     <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">{service.title}</h3>
+//                     <p className="text-gray-200 text-xs sm:text-sm md:text-base leading-tight sm:leading-normal">{service.description}</p>
 //                   </div>
 //                 </div>
 //               </motion.div>
@@ -339,16 +368,16 @@
 //         </div>
 //       </section>
 
-//       {/* Portfolio Showcase with Default Hover */}
-//       <section className="py-12 md:py-16 bg-gray-100">
-//         <div className="container mx-auto px-4">
-//           <h2 className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-8 md:mb-12">Our Work</h2>
+//       {/* Portfolio Showcase */}
+//       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-gray-100">
+//         <div className="container mx-auto px-3 sm:px-4">
+//           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-6 sm:mb-8 md:mb-10 lg:mb-12">Our Work</h2>
 
-//           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+//           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
 //             {portfolioItems.map((item, index) => (
 //               <motion.div
 //                 key={index}
-//                 className="relative h-60 sm:h-64 md:h-72 lg:h-80 overflow-hidden rounded-lg md:rounded-xl group cursor-pointer"
+//                 className="relative h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 overflow-hidden rounded sm:rounded-lg md:rounded-xl group cursor-pointer"
 //                 initial={{ opacity: 0, scale: 0.9 }}
 //                 whileInView={{ opacity: 1, scale: 1 }}
 //                 whileHover={{ scale: 1.03 }}
@@ -360,20 +389,19 @@
 //                   alt={item.title}
 //                   fill
 //                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+//                   sizes="(max-width: 480px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 25vw, 25vw"
 //                 />
 
-//                 {/* Always visible overlay with information */}
 //                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
-//                   <div className="p-3 md:p-4 text-white">
-//                     <span className="text-xs bg-primary px-2 py-1 rounded-full">{item.type}</span>
-//                     <h4 className="text-base md:text-lg font-semibold mt-1 md:mt-2">{item.title}</h4>
+//                   <div className="p-2 sm:p-3 md:p-4 text-white">
+//                     <span className="text-[10px] xs:text-xs bg-primary px-1 xs:px-2 py-0.5 xs:py-1 rounded-full">{item.type}</span>
+//                     <h4 className="text-sm xs:text-base sm:text-lg font-semibold mt-1">{item.title}</h4>
 //                   </div>
 //                 </div>
 
-//                 {/* Additional info on hover */}
 //                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-//                   <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-//                     <button className="bg-primary hover:bg-[#822431] text-white px-3 py-1 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium">
+//                   <div className="text-center p-2 sm:p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+//                     <button className="bg-primary hover:bg-[#822431] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm font-medium">
 //                       View Project
 //                     </button>
 //                   </div>
@@ -382,12 +410,12 @@
 //             ))}
 //           </div>
 
-//           <div className="text-center mt-8 md:mt-12">
+//           <div className="text-center mt-6 sm:mt-8 md:mt-10 lg:mt-12">
 //             <Link href={"/advertising"} >
 //               <motion.button
 //                 whileHover={{ scale: 1.05 }}
 //                 whileTap={{ scale: 0.95 }}
-//                 className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium transition-colors text-sm md:text-base"
+//                 className="border border-primary sm:border-2 text-primary hover:bg-primary hover:text-white px-4 py-2 sm:px-5 sm:py-2 md:px-6 md:py-3 rounded-lg font-medium transition-colors text-xs sm:text-sm md:text-base"
 //               >
 //                 View Full Portfolio
 //               </motion.button>
@@ -397,18 +425,18 @@
 //       </section>
 
 //       {/* Advertising Services */}
-//       <section className="py-12 md:py-16 bg-white">
-//         <div className="container mx-auto px-4">
-//           <h2 className="text-3xl md:text-4xl font-extrabold text-center text-primary mb-4">Advertising Solutions</h2>
-//           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8 md:mb-12 text-sm md:text-base">
+//       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
+//         <div className="container mx-auto px-3 sm:px-4">
+//           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-3 sm:mb-4">Advertising Solutions</h2>
+//           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-xs sm:text-sm md:text-base px-2">
 //             Innovative advertising strategies that maximize your brand visibility and impact
 //           </p>
 
-//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+//           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
 //             {services.map((service, index) => (
 //               <motion.div
 //                 key={index}
-//                 className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer h-72 sm:h-80 md:h-96"
+//                 className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-lg group cursor-pointer h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80"
 //                 initial={{ opacity: 0, y: 50 }}
 //                 whileInView={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.6, delay: index * 0.15 }}
@@ -419,14 +447,15 @@
 //                   alt={service.title}
 //                   fill
 //                   className="object-cover transform transition-transform duration-700 ease-out group-hover:scale-110"
+//                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
 //                 />
 
 //                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
 
-//                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-//                   <h3 className="text-lg md:text-xl font-bold mb-1 md:mb-2">{service.title}</h3>
-//                   <div className="h-0 overflow-hidden group-hover:h-14 md:group-hover:h-16 transition-all duration-500">
-//                     <p className="text-xs md:text-sm text-gray-200">{service.description}</p>
+//                 <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6 text-white">
+//                   <h3 className="text-base sm:text-lg md:text-xl font-bold mb-1">{service.title}</h3>
+//                   <div className="h-0 overflow-hidden group-hover:h-12 sm:group-hover:h-14 md:group-hover:h-16 transition-all duration-500">
+//                     <p className="text-xs sm:text-sm text-gray-200 leading-tight sm:leading-normal">{service.description}</p>
 //                   </div>
 //                 </div>
 //               </motion.div>
@@ -436,11 +465,11 @@
 //       </section>
 
 //       {/* Testimonial Section */}
-//       <section className="py-12 md:py-16 bg-primary text-white mb-4">
-//         <div className="container mx-auto px-4 text-center">
-//           <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12">What Our Clients Say</h2>
+//       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-primary text-white mb-4">
+//         <div className="container mx-auto px-3 sm:px-4 text-center">
+//           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 md:mb-10 lg:mb-12">What Our Clients Say</h2>
 
-//           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+//           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
 //             {[
 //               {
 //                 text: "They made our wedding day absolutely perfect! Every detail was taken care of.",
@@ -460,16 +489,16 @@
 //             ].map((testimonial, index) => (
 //               <motion.div
 //                 key={index}
-//                 className="bg-white/10 backdrop-blur-md p-4 md:p-6 rounded-lg md:rounded-xl"
+//                 className="bg-white/10 backdrop-blur-md p-3 sm:p-4 md:p-5 lg:p-6 rounded sm:rounded-lg md:rounded-xl"
 //                 initial={{ opacity: 0, y: 20 }}
 //                 whileInView={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.5, delay: index * 0.2 }}
 //                 viewport={{ once: true }}
 //               >
-//                 <div className="text-3xl md:text-4xl mb-2 md:mb-4">&quot;</div>
-//                 <p className="mb-3 md:mb-4 text-sm md:text-base">{testimonial.text}</p>
-//                 <p className="font-semibold text-base md:text-lg">{testimonial.author}</p>
-//                 <p className="text-xs md:text-sm text-white/70">{testimonial.type}</p>
+//                 <div className="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-3 md:mb-4">&quot;</div>
+//                 <p className="mb-2 sm:mb-3 md:mb-4 text-xs sm:text-sm md:text-base leading-relaxed">{testimonial.text}</p>
+//                 <p className="font-semibold text-sm sm:text-base md:text-lg">{testimonial.author}</p>
+//                 <p className="text-xs sm:text-sm text-white/70">{testimonial.type}</p>
 //               </motion.div>
 //             ))}
 //           </div>
@@ -477,11 +506,11 @@
 //       </section>
 
 //       {/* CTA Section */}
-//       <section className="py-16 md:py-20 bg-cover bg-center relative mb-4">
+//       <section className="py-12 sm:py-14 md:py-16 lg:py-20 bg-cover bg-center relative mb-4">
 //         <div className="absolute inset-0 bg-primary"></div>
-//         <div className="container mx-auto px-4 text-center relative z-10 text-white">
-//           <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Ready to Create Something Amazing?</h2>
-//           <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">Let&quot;s discuss your vision and bring it to life</p>
+//         <div className="container mx-auto px-3 sm:px-4 text-center relative z-10 text-white">
+//           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 sm:mb-3 md:mb-4">Ready to Create Something Amazing?</h2>
+//           <p className="text-base sm:text-lg md:text-xl mb-4 sm:mb-5 md:mb-6 lg:mb-8 max-w-2xl mx-auto">Let&apos;s discuss your vision and bring it to life</p>
 //           <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
 //             <Link href={"/contact-us"}>
 //               <motion.button
@@ -497,7 +526,7 @@
 //                 whileHover={{ scale: 1.05 }}
 //                 whileTap={{ scale: 0.95 }}
 //                 className="bg-transparent cursor-pointer border-2 border-white text-white hover:bg-white/10 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
-//               >
+//               > 
 //                 Request a Quote
 //               </motion.button>
 //             </Link>
@@ -510,6 +539,8 @@
 //     </div>
 //   );
 // }
+
+
 "use client"
 import Footers from "@/components/Footers.jsx";
 import Header from "../components/Headers.jsx";
@@ -712,113 +743,116 @@ export default function Home() {
         <Header />
       </div>
 
-      {/* Hero Section with Image Slider Background - FIXED RESPONSIVE HEIGHT */}
+      {/* Hero Section with Image Slider Background - ENHANCED RESPONSIVE DESIGN */}
       <section
-        className="relative min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:min-h-[90vh] xl:min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-8 sm:pb-12"
+        className="relative min-h-[50vh] xs:min-h-[55vh] sm:min-h-[65vh] md:min-h-[75vh] lg:min-h-[85vh] xl:min-h-screen flex items-center justify-center overflow-hidden pt-16 pb-4 sm:pb-8 md:pb-12"
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        {/* Image Slider */}
+        {/* Image Slider - Enhanced for mobile */}
         <div className="absolute inset-0 z-0">
           {heroImages.map((image, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
-                }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               <Image
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover"
+                className="object-contain md:object-cover object-center"
                 priority={index === 0}
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, 100vw"
+                sizes="(max-width: 320px) 100vw, (max-width: 425px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1440px) 100vw, 100vw"
+                quality={90}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaUMkO0Lb6abjC6bkSqSqpI9aY1Z8Yj2ZiaSq1q5hq2tJgAAA9JREFU"
               />
-              {/* Enhanced overlay for better text readability */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70"></div>
+              {/* Enhanced gradient overlay for better text readability on all screens */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70 
+                            sm:from-black/40 sm:via-black/60 sm:to-black/80
+                            md:from-black/30 md:via-black/50 md:to-black/70"></div>
             </div>
           ))}
         </div>
 
-        {/* Navigation Arrows - Improved positioning */}
+        {/* Navigation Arrows - Mobile Optimized */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 sm:left-4 md:left-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
+          className="absolute left-2 xs:left-3 sm:left-4 md:left-6 z-20 p-1.5 xs:p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-all duration-300 flex items-center justify-center shadow-lg"
           aria-label="Previous slide"
         >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
         <button
           onClick={nextSlide}
-          className="absolute right-2 sm:right-4 md:right-6 z-20 p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-colors hidden sm:flex items-center justify-center"
+          className="absolute right-2 xs:right-3 sm:right-4 md:right-6 z-20 p-1.5 xs:p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-md text-white hover:bg-white/30 transition-all duration-300 flex items-center justify-center shadow-lg"
           aria-label="Next slide"
         >
-          <svg className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
 
-        {/* Slide Indicators - Uncommented and improved */}
-
-
-        {/* Hero Content - Improved positioning and spacing */}
-        <div className="container mx-auto px-4 sm:px-6 z-10 text-center text-white w-full relative">
+        {/* Hero Content - Mobile First Approach */}
+        <div className="container mx-auto mt-18 px-3 xs:px-4 sm:px-6 z-10 text-center text-white w-full relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-4xl mx-auto w-full px-2 sm:px-4"
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="max-w-4xl mx-auto w-full px-2 xs:px-3 sm:px-4"
             >
-              {/* Title with better responsive sizing and spacing */}
+              {/* Title with optimized responsive sizing */}
               <motion.h1
-                className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight sm:leading-normal"
+                className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-3 xs:mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-tight sm:leading-snug md:leading-normal"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
               >
                 {heroImages[currentSlide].title}
               </motion.h1>
 
-              {/* Description with better readability */}
+              {/* Description with optimized readability */}
               <motion.p
-                className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed sm:leading-normal font-light"
+                className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-4 xs:mb-5 sm:mb-6 md:mb-8 max-w-2xl xs:max-w-3xl mx-auto leading-relaxed sm:leading-normal font-light px-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               >
                 {heroImages[currentSlide].description}
               </motion.p>
             </motion.div>
           </AnimatePresence>
 
-          {/* Buttons - Improved spacing and sizing */}
+          {/* Buttons - Mobile Optimized */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center"
+            className="flex flex-col md:flex-row  xs:flex-row gap-2 xs:gap-3 sm:gap-4 justify-center items-center mt-16 xs:mt-5 sm:mt-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            <Link href={"/contact-us"}>
+            <Link href={"/contact-us"} className="w-full md:w-[20%] xs:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-primary hover:bg-[#822431] text-white px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium shadow-lg text-base md:text-lg"
+                className="bg-primary hover:bg-[#822431] text-white px-4 xs:px-5 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 rounded-lg font-medium shadow-lg text-xs xs:text-sm sm:text-base md:text-lg w-full  xs:w-auto transition-all duration-300"
               >
                 Plan Your Event
               </motion.button>
             </Link>
-            <Link href={"/our-services"}>
+            <Link href={"/our-services"} className="w-full md:w-[20%] xs:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/20 backdrop-blur-md border-2 border-white text-white hover:bg-white/30 px-6 py-2 md:px-8 md:py-3 rounded-lg font-medium text-base md:text-lg"
+                className="bg-white/20 backdrop-blur-md border border-white sm:border-2 text-white hover:bg-white/30 px-4 xs:px-5 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 rounded-lg font-medium text-xs xs:text-sm sm:text-base md:text-lg w-full  xs:w-auto transition-all duration-300"
               >
                 View Our Work
               </motion.button>
@@ -827,7 +861,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Rest of your sections remain the same */}
+      {/* Rest of your components remain exactly the same */}
       <section className="py-8 sm:py-10 md:py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-3 sm:px-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center text-primary mb-3 sm:mb-4">What We Do</h2>
@@ -855,14 +889,6 @@ export default function Home() {
                     className="w-full h-full object-cover opacity-50"
                   >
                     <source src={service.src} type="video/mp4" />
-                    <Image
-                      src="/hero-background.jpg"
-                      alt="Elegant wedding background"
-                      fill
-                      className="object-cover"
-                      priority
-                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    />
                   </video>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
