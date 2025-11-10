@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 // Service categories
 const serviceCategories = [
     {
+        id: 'advertising',
+        title: 'ADVERTISING SEVICES',
+        description: 'Innovative outdoor and mobile advertising campaigns to maximize your brand visibility.',
+        icon: '📢'
+    },
+    {
         id: 'corporate',
         title: 'CORPORATE EVENTS',
         description: 'Professional event management for conferences, product launches, and corporate gatherings.',
@@ -32,12 +38,6 @@ const serviceCategories = [
         title: 'ARTIST MANAGEMENT',
         description: 'Comprehensive management services for artists and performers.',
         icon: '🎤'
-    },
-    {
-        id: 'advertising',
-        title: 'ADVERTISING SOLUTIONS',
-        description: 'Innovative outdoor and mobile advertising campaigns to maximize your brand visibility.',
-        icon: '📢'
     }
 ];
 

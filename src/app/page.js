@@ -559,6 +559,12 @@ export default function Home() {
       description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
     },
     {
+      src: "/advertising/bus4.jpeg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
+    },
+    {
       src: "/SliderImages/slider2.jpg",
       alt: "Van Branding - Your Brand on the Move",
       title: "Van Branding - Your Brand on the Move",
@@ -569,6 +575,18 @@ export default function Home() {
       alt: "Social event planning",
       title: "Unipole & Hoarding - Command Attention at Key Locations",
       description: "Dominate strategic high-visibility locations with large-scale outdoor advertising that captures attention 24/7 from pedestrians and motorists."
+    },
+    {
+      src: "/SliderImages/slider8.jpeg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
+    },
+    {
+       src: "/SliderImages/slider9.jpeg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
     },
     {
       src: "/SliderImages/slider4.jpg",
@@ -590,6 +608,12 @@ export default function Home() {
     },
     {
       src: "/SliderImages/slider7.jpeg",
+      alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      title: "Bus Branding - Mobile Billboards That Dominate City Streets",
+      description: "Make Your Brand the Talk of the Town with Professional Bus Branding"
+    },
+    {
+      src: "/SliderImages/slider10.jpeg",
       alt: "Bus Branding - Mobile Billboards That Dominate City Streets",
       title: "Bus Branding - Mobile Billboards That Dominate City Streets",
       description: "Make Your Brand the Talk of the Town with Professional Bus Branding"

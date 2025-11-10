@@ -78,7 +78,11 @@ const ModernGallery = () => {
         { id: 1, src: "/advertising/bus1.jpeg", alt: "Bus Shelter Main" },
         { id: 2, src: "/advertising/bus2.jpeg", alt: "Bus Shelter Side" },
         { id: 3, src: "/advertising/bus3.jpeg", alt: "Bus Shelter Night" },
-        { id: 4, src: "/advertising/bus4.jpeg", alt: "Bus Shelter Closeup" }
+        { id: 4, src: "/advertising/bus4.jpeg", alt: "Bus Shelter Closeup" },
+        { id: 5, src: "/SliderImages/slider8.jpeg", alt: "Bus Shelter Main" },
+        { id: 6, src: "/SliderImages/slider9.jpeg", alt: "Bus Shelter Side" },
+        { id: 7, src: "/SliderImages/slider10.jpeg", alt: "Bus Shelter Night" },
+        { id: 8, src: "/SliderImages/slider1.jpg", alt: "Bus Shelter Closeup" }
       ]
     },
     {
