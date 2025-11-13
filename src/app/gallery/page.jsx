@@ -37,11 +37,15 @@ const ModernGallery = () => {
     "Leaflets & Pamphlets",
     "Backdrops, Standees & Kiosks",
     "No Parking Boards",
-    "Internal Bus Branding"
+    "Internal Bus Branding",
+    "Shutter Painting",
+    "GSB Board",
+    "Temporary Hoarding",
+    "Cab Branding"
   ];
 
-  // Updated Gallery data with multiple photos per project
-  const galleryData = [
+  // Advertising Gallery Data
+  const advertisingData = [
     {
       id: 1,
       title: "Auto Branding Campaign",
@@ -121,7 +125,11 @@ const ModernGallery = () => {
         { id: 1, src: "/advertising/wall_painting1.jpeg", alt: "Wall Painting 1" },
         { id: 2, src: "/advertising/wall_painting2.jpeg", alt: "Wall Painting 2" },
         { id: 3, src: "/advertising/wall_painting3.jpeg", alt: "Wall Painting 3" },
-        { id: 4, src: "/advertising/wall_painting4.jpeg", alt: "Wall Painting 4" }
+        { id: 4, src: "/advertising/wall_painting4.jpeg", alt: "Wall Painting 4" },
+        { id: 5, src: "/advertising/wall_painting5.jpeg", alt: "Wall Painting 5" },
+        { id: 6, src: "/advertising/wall_painting6.jpeg", alt: "Wall Painting 6" },
+        { id: 7, src: "/advertising/wall_painting7.jpeg", alt: "Wall Painting 7" },
+        { id: 8, src: "/advertising/wall_painting8.jpeg", alt: "Wall Painting 8" },
       ]
     },
     {
@@ -173,7 +181,10 @@ const ModernGallery = () => {
         { id: 1, src: "/advertising/van_canter1.jpeg", alt: "Van Canter Front" },
         { id: 2, src: "/advertising/van_canter2.jpeg", alt: "Van Canter Side" },
         { id: 3, src: "/advertising/van_canter3.jpeg", alt: "Van Canter Back" },
-        { id: 4, src: "/advertising/van_canter4.jpeg", alt: "Van Canter Detail" }
+        { id: 4, src: "/advertising/van_canter4.jpeg", alt: "Van Canter Detail" },
+        { id: 5, src: "/advertising/van_canter5.jpeg", alt: "Van Canter Front" },
+        { id: 6, src: "/advertising/van_canter6.jpeg", alt: "Van Canter Side" },
+        { id: 7, src: "/advertising/van_canter7.jpeg", alt: "Van Canter Back" },
       ]
     },
     {
@@ -336,10 +347,68 @@ const ModernGallery = () => {
         { id: 4, src: "/advertising/internal_bus_branding4.jpeg", alt: "E-Rickshaw Detail" }
       ]
     },
-
-    // Events category (single photo projects)
     {
       id: 23,
+      title: "Shutter Painting",
+      description: "Shop Shutter Painting",
+      category: "advertising",
+      subCategory: "Shop Shutter Painting",
+      photos: [
+        { id: 1, src: "/advertising/shutter_painting1.jpeg", alt: "Shutter Painting" },
+        { id: 2, src: "/advertising/shutter_painting2.jpeg", alt: "Shutter Paintinge" },
+        { id: 3, src: "/advertising/shutter_painting3.jpeg", alt: "Shutter Painting" },
+      ]
+    },
+    {
+      id: 24,
+      title: "GSB Board Campaign",
+      description: "Government and commercial GSB boards",
+      category: "advertising",
+      subCategory: "GSB Board",
+      photos: [
+        { id: 1, src: "/advertising/gsb_board1.jpeg", alt: "GSB Board 1" },
+        { id: 2, src: "/advertising/gsb_board2.jpeg", alt: "GSB Board 2" },
+        { id: 3, src: "/advertising/gsb_board3.jpeg", alt: "GSB Board 3" },
+        { id: 4, src: "/advertising/gsb_board4.jpeg", alt: "GSB Board 4" },
+        { id: 5, src: "/advertising/gsb_board5.jpeg", alt: "GSB Board 4" },
+        { id: 6, src: "/advertising/gsb_board6.jpeg", alt: "GSB Board 4" },
+        { id: 7, src: "/advertising/gsb_board7.jpeg", alt: "GSB Board 4" }
+      ]
+    },
+    {
+      id: 25,
+      title: "Temporary Hoarding",
+      description: "Construction site hoarding advertising",
+      category: "advertising",
+      subCategory: "Temporary Hoarding",
+      photos: [
+        { id: 1, src: "/advertising/temporary_hoarding1.jpeg", alt: "Temporary Hoarding 1" },
+        { id: 2, src: "/advertising/temporary_hoarding2.jpeg", alt: "Temporary Hoarding 2" },
+        { id: 3, src: "/advertising/temporary_hoarding3.jpeg", alt: "Temporary Hoarding 3" },
+        { id: 4, src: "/advertising/temporary_hoarding4.jpeg", alt: "Temporary Hoarding 4" },
+        { id: 5, src: "/advertising/temporary_hoarding5.jpeg", alt: "Temporary Hoarding 4" }
+      ]
+    },
+    {
+      id: 26,
+      title: "Cab Branding",
+      description: "Taxi and cab advertising solutions",
+      category: "advertising",
+      subCategory: "Cab Branding",
+      photos: [
+        { id: 1, src: "/advertising/cab_branding1.jpeg", alt: "Cab Branding Front" },
+        { id: 2, src: "/advertising/cab_branding2.jpeg", alt: "Cab Branding Side" },
+        { id: 3, src: "/advertising/cab_branding3.jpeg", alt: "Cab Branding Back" },
+        { id: 4, src: "/advertising/cab_branding4.jpeg", alt: "Cab Branding Interior" },
+        { id: 5, src: "/advertising/cab_branding5.jpeg", alt: "Cab Branding Interior" }
+      ]
+    }
+  ];
+
+  // Events Gallery Data
+  const eventsData = [
+    {
+      id: 27,
       title: "Product Launch Event",
       description: "Successful product launch with 500+ attendees",
       category: "events",
@@ -348,7 +417,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 24,
+      id: 28,
       title: "Corporate Conference",
       description: "Annual corporate conference 2024",
       category: "events",
@@ -357,7 +426,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 25,
+      id: 29,
       title: "Charity Gala Night",
       description: "Fundraising event for local community",
       category: "events",
@@ -366,7 +435,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 26,
+      id: 30,
       title: "Tech Summit 2024",
       description: "Leading technology conference",
       category: "events",
@@ -375,7 +444,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 27,
+      id: 31,
       title: "10th Birthday Bash",
       description: "Memorable birthday celebration event",
       category: "events",
@@ -384,7 +453,7 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 28,
+      id: 32,
       title: "Music Festival",
       description: "3-day outdoor music festival",
       category: "events",
@@ -393,110 +462,149 @@ const ModernGallery = () => {
       ]
     },
     {
-      id: 29,
+      id: 33,
       title: "Wedding Decor",
-      description: "",
+      description: "Elegant wedding decoration setup",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event1.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 30,
+      id: 34,
       title: "Wedding Decor",
-      description: "",
+      description: "Beautiful wedding venue decoration",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event2.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 31,
+      id: 35,
       title: "Wedding Decor",
-      description: "",
+      description: "Traditional wedding setup",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event3.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 32,
+      id: 36,
       title: "Wedding Decor",
-      description: "",
+      description: "Modern wedding theme",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event4.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 33,
+      id: 37,
       title: "Wedding Decor",
-      description: "",
+      description: "Royal wedding decoration",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event5.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 34,
+      id: 38,
       title: "Wedding Decor",
-      description: "",
+      description: "Outdoor wedding setup",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event6.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 35,
+      id: 39,
       title: "Wedding Decor",
-      description: "",
+      description: "Intimate wedding ceremony",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event7.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 36,
+      id: 40,
       title: "Wedding Decor",
-      description: "",
+      description: "Grand wedding reception",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event8.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 37,
+      id: 41,
       title: "Wedding Decor",
-      description: "",
+      description: "Cultural wedding theme",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event9.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 38,
+      id: 42,
       title: "Wedding Decor",
-      description: "",
+      description: "Luxury wedding setup",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event10.jpeg", alt: "wedding decor" }
       ]
     },
     {
-      id: 39,
+      id: 43,
       title: "Wedding Decor",
-      description: "",
+      description: "Destination wedding decor",
       category: "events",
       photos: [
         { id: 1, src: "/events/wedding_event11.jpeg", alt: "wedding decor" }
       ]
     },
+    {
+      id: 44,
+      title: "Product Launch Event",
+      description: "Innovative product showcase",
+      category: "events",
+      photos: [
+        { id: 1, src: "/events/product_launch1.jpeg", alt: "Product Launch Event" }
+      ]
+    },
+    {
+      id: 45,
+      title: "Product Launch Event",
+      description: "Corporate product unveiling",
+      category: "events",
+      photos: [
+        { id: 1, src: "/events/product_launch2.jpeg", alt: "Product Launch Event" }
+      ]
+    },
+    {
+      id: 46,
+      title: "Product Launch Event",
+      description: "Tech product demonstration",
+      category: "events",
+      photos: [
+        { id: 1, src: "/events/product_launch3.jpeg", alt: "Product Launch Event" }
+      ]
+    },
+    {
+      id: 47,
+      title: "Product Launch Event",
+      description: "Exclusive product preview",
+      category: "events",
+      photos: [
+        { id: 1, src: "/events/product_launch4.jpeg", alt: "Product Launch Event" }
+      ]
+    }
   ];
+
+  // Combined gallery data
+  const galleryData = [...advertisingData, ...eventsData];
 
   const categories = [
     { id: 'all', label: 'All Projects', count: galleryData.length },
-    { id: 'advertising', label: 'Advertising', count: galleryData.filter(project => project.category === 'advertising').length },
-    { id: 'events', label: 'Events', count: galleryData.filter(project => project.category === 'events').length }
+    { id: 'advertising', label: 'Advertising', count: advertisingData.length },
+    { id: 'events', label: 'Events', count: eventsData.length }
   ];
 
   // Flatten projects into individual images for display in grid
