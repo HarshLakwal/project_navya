@@ -352,7 +352,7 @@ const ModernGallery = () => {
       title: "Shutter Painting",
       description: "Shop Shutter Painting",
       category: "advertising",
-      subCategory: "Shop Shutter Painting",
+      subCategory: "Shutter Painting",
       photos: [
         { id: 1, src: "/advertising/shutter_painting1.jpeg", alt: "Shutter Painting" },
         { id: 2, src: "/advertising/shutter_painting2.jpeg", alt: "Shutter Paintinge" },
