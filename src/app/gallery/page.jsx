@@ -19,7 +19,7 @@ const ModernGallery = () => {
     "Auto Branding (Vinyl & Hood)",
     "Tricycle Advertising",
     "E-Rickshaw & Mo Pad Bikes",
-    "Bus Branding & Bus Shelters",
+    "Bus Advertising",
     "LED Van Branding",
     "Van Canter Branding",
     "Airport Branding",
@@ -74,10 +74,10 @@ const ModernGallery = () => {
     },
     {
       id: 3,
-      title: "Bus Shelter Campaign",
+      title: "Bus Advertising",
       description: "Strategic bus shelter advertising",
       category: "advertising",
-      subCategory: "Bus Branding & Bus Shelters",
+      subCategory: "Bus Advertising",
       photos: [
         { id: 1, src: "/advertising/bus1.jpeg", alt: "Bus Shelter Main" },
         { id: 2, src: "/advertising/bus2.jpeg", alt: "Bus Shelter Side" },
