@@ -31,6 +31,7 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const geistSans = Geist({
@@ -222,7 +223,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        <Suspense fallback={null}>
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        </Suspense>
         {children}
       </body>
     </html>
