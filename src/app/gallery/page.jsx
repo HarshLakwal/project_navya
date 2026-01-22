@@ -4,6 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Header from '@/components/Headers';
 import Footers from '@/components/Footers';
+import axios from 'axios';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
 const ModernGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -14,603 +18,141 @@ const ModernGallery = () => {
   const [showSubCategories, setShowSubCategories] = useState(false);
   const scrollRef = useRef(null);
 
-  // Sub-categories for advertising
-  const advertisingSubCategories = [
-    "Auto Branding (Vinyl & Hood)",
-    "Tricycle Advertising",
-    "E-Rickshaw & Mo Pad Bikes",
-    "Bus Advertising",
-    "LED Van Branding",
-    "Van Canter Branding",
-    "Airport Branding",
-    "International Cricket Branding",
-    "Mall Branding & Activations",
-    "Multiplex Branding",
-    "Radio Campaign",
-    "Chartered Bus TV Advertising",
-    "Wall Painting & Graffiti",
-    "In-Shop Branding",
-    "Exhibition Creative Stalls",
-    "Unipoles & Hoardings",
-    "Corporate Event Production",
-    "Printing Segment Work",
-    "Leaflets & Pamphlets",
-    "Backdrops, Standees & Kiosks",
-    "No Parking Boards",
-    "Internal Bus Branding",
-    "Shutter Painting",
-    "GSB Board",
-    "Temporary Hoarding",
-    "Cab Branding"
-  ];
+  // API state management
+  const [galleryData, setGalleryData] = useState([]);
+  const [advertisingSubCategories, setAdvertisingSubCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Advertising Gallery Data
-  const advertisingData = [
-    {
-      id: 1,
-      title: "Auto Branding Campaign",
-      description: "Creative vehicle wrapping solutions",
-      category: "advertising",
-      subCategory: "Auto Branding (Vinyl & Hood)",
-      photos: [
-        { id: 1, src: "/advertising/auto_branding.webp", alt: "Auto Branding Front View" },
-        { id: 2, src: "/advertising/auto_branding1.jpg", alt: "Auto Branding Side View" },
-        { id: 3, src: "/advertising/auto_branding2.jpeg", alt: "Auto Branding Back View" },
-        { id: 4, src: "/advertising/auto_branding3.jpg", alt: "Auto Branding Detail" }
-      ]
-    },
-    {
-      id: 2,
-      title: "Tricycle Advertising",
-      description: "Mobile advertising on tricycles",
-      category: "advertising",
-      subCategory: "Tricycle Advertising",
-      photos: [
-        { id: 1, src: "/advertising/tricycle1.jpeg", alt: "Tricycle Ad Front" },
-        { id: 2, src: "/advertising/tricycle2.jpeg", alt: "Tricycle Ad Side" },
-        { id: 3, src: "/advertising/tricycle3.jpeg", alt: "Tricycle Ad Back" },
-        { id: 4, src: "/advertising/tricycle4.jpeg", alt: "Tricycle Ad Detail" }
-      ]
-    },
-    {
-      id: 3,
-      title: "Bus Advertising",
-      description: "Strategic bus shelter advertising",
-      category: "advertising",
-      subCategory: "Bus Advertising",
-      photos: [
-        { id: 1, src: "/advertising/bus1.jpeg", alt: "Bus Shelter Main" },
-        { id: 2, src: "/advertising/bus2.jpeg", alt: "Bus Shelter Side" },
-        { id: 3, src: "/advertising/bus3.jpeg", alt: "Bus Shelter Night" },
-        { id: 4, src: "/advertising/bus4.jpeg", alt: "Bus Shelter Closeup" },
-        { id: 5, src: "/SliderImages/slider8.jpeg", alt: "Bus Shelter Main" },
-        { id: 6, src: "/SliderImages/slider9.jpeg", alt: "Bus Shelter Side" },
-        { id: 7, src: "/SliderImages/slider10.jpeg", alt: "Bus Shelter Night" },
-        { id: 8, src: "/SliderImages/slider1.jpg", alt: "Bus Shelter Closeup" }
-      ]
-    },
-    {
-      id: 4,
-      title: "LED Van Promotion",
-      description: "Dynamic mobile LED advertising",
-      category: "advertising",
-      subCategory: "LED Van Branding",
-      photos: [
-        { id: 1, src: "/advertising/LED_van1.jpeg", alt: "LED Van Front" },
-        { id: 2, src: "/advertising/LED_van2.jpeg", alt: "LED Van Side" },
-        { id: 3, src: "/advertising/LED_van3.jpeg", alt: "LED Van Back" },
-        { id: 4, src: "/advertising/LED_van4.jpeg", alt: "LED Van Display" }
-      ]
-    },
-    {
-      id: 5,
-      title: "Mall Activation",
-      description: "Interactive mall branding campaign",
-      category: "advertising",
-      subCategory: "Mall Branding & Activations",
-      photos: [
-        { id: 1, src: "/advertising/mall1.webp", alt: "Mall Activation Main" },
-        { id: 2, src: "/advertising/mall2.webp", alt: "Mall Activation Booth" },
-        { id: 3, src: "/advertising/mall3.png", alt: "Mall Activation Crowd" },
-        { id: 4, src: "/advertising/mall4.jpg", alt: "Mall Branding Entrance" }
-      ]
-    },
-    {
-      id: 6,
-      title: "Urban Art Campaign",
-      description: "Creative wall paintings and graffiti",
-      category: "advertising",
-      subCategory: "Wall Painting & Graffiti",
-      photos: [
-        { id: 1, src: "/advertising/wall_painting1.jpeg", alt: "Wall Painting 1" },
-        { id: 2, src: "/advertising/wall_painting2.jpeg", alt: "Wall Painting 2" },
-        { id: 3, src: "/advertising/wall_painting3.jpeg", alt: "Wall Painting 3" },
-        { id: 4, src: "/advertising/wall_painting4.jpeg", alt: "Wall Painting 4" },
-        { id: 5, src: "/advertising/wall_painting5.jpeg", alt: "Wall Painting 5" },
-        { id: 6, src: "/advertising/wall_painting6.jpeg", alt: "Wall Painting 6" },
-        { id: 7, src: "/advertising/wall_painting7.jpeg", alt: "Wall Painting 7" },
-        { id: 8, src: "/advertising/wall_painting8.jpeg", alt: "Wall Painting 8" },
-      ]
-    },
-    {
-      id: 7,
-      title: "Airport Advertising",
-      description: "Premium airport branding solutions",
-      category: "advertising",
-      subCategory: "Airport Branding",
-      photos: [
-        { id: 1, src: "/advertising/airport1.jpeg", alt: "Airport Ad 1" },
-        { id: 2, src: "/advertising/airport2.jpeg", alt: "Airport Ad 2" },
-        { id: 3, src: "/advertising/airport3.jpeg", alt: "Airport Ad 3" },
-        { id: 4, src: "/advertising/airport4.jpeg", alt: "Airport Ad 4" }
-      ]
-    },
-    {
-      id: 8,
-      title: "Sports Sponsorship",
-      description: "Kabadi tournament branding",
-      category: "advertising",
-      subCategory: "International Cricket Branding",
-      photos: [
-        { id: 1, src: "/advertising/cricket1.webp", alt: "Sports Sponsorship 1" },
-        { id: 2, src: "/advertising/cricket2.webp", alt: "Sports Sponsorship 2" },
-        { id: 3, src: "/advertising/cricket3.jpg", alt: "Sports Sponsorship 3" },
-        { id: 4, src: "/advertising/cricket4.jpeg", alt: "Sports Sponsorship 4" }
-      ]
-    },
-    {
-      id: 9,
-      title: "Radio Advertising",
-      description: "Creative radio commercial campaigns",
-      category: "advertising",
-      subCategory: "Radio Campaign",
-      photos: [
-        { id: 1, src: "/advertising/radio_mirchi1.jpeg", alt: "Radio Campaign 1" },
-        { id: 2, src: "/advertising/radio_mirchi2.jpeg", alt: "Radio Campaign 2" },
-        { id: 3, src: "/advertising/radio_mirchi3.jpeg", alt: "Radio Campaign 3" },
-        { id: 4, src: "/advertising/radio_mirchi1.jpeg", alt: "Radio Campaign 4" }
-      ]
-    },
-    {
-      id: 10,
-      title: "Van Canter Campaign",
-      description: "Mobile van advertising solutions",
-      category: "advertising",
-      subCategory: "Van Canter Branding",
-      photos: [
-        { id: 1, src: "/advertising/van_canter1.jpeg", alt: "Van Canter Front" },
-        { id: 2, src: "/advertising/van_canter2.jpeg", alt: "Van Canter Side" },
-        { id: 3, src: "/advertising/van_canter3.jpeg", alt: "Van Canter Back" },
-        { id: 4, src: "/advertising/van_canter4.jpeg", alt: "Van Canter Detail" },
-        { id: 5, src: "/advertising/van_canter5.jpeg", alt: "Van Canter Front" },
-        { id: 6, src: "/advertising/van_canter6.jpeg", alt: "Van Canter Side" },
-        { id: 7, src: "/advertising/van_canter7.jpeg", alt: "Van Canter Back" },
-      ]
-    },
-    {
-      id: 11,
-      title: "Multiplex Advertising",
-      description: "Cinema and multiplex branding",
-      category: "advertising",
-      subCategory: "Multiplex Branding",
-      photos: [
-        { id: 1, src: "/advertising/multiplex1.jpg", alt: "Multiplex Lobby" },
-        { id: 2, src: "/advertising/multiplex2.webp", alt: "Multiplex Screen" },
-        { id: 3, src: "/advertising/multiplex3.jpeg", alt: "Multiplex Entrance" },
-        { id: 4, src: "/advertising/multiplex4.webp", alt: "Multiplex Branding" }
-      ]
-    },
-    {
-      id: 12,
-      title: "Bus TV Advertising",
-      description: "Chartered bus television campaigns",
-      category: "advertising",
-      subCategory: "Chartered Bus TV Advertising",
-      photos: [
-        { id: 1, src: "/advertising/bus_tv3.jpeg", alt: "Bus TV Screen 1" },
-        { id: 2, src: "/advertising/bus_tv2.jpeg", alt: "Bus TV Screen 2" },
-        { id: 3, src: "/advertising/bus_tv1.jpeg", alt: "Bus TV Screen 3" },
-        { id: 4, src: "/advertising/bus_tv4.jpeg", alt: "Bus TV Screen 4" }
-      ]
-    },
-    {
-      id: 13,
-      title: "In-Shop Branding",
-      description: "Retail store branding solutions",
-      category: "advertising",
-      subCategory: "In-Shop Branding",
-      photos: [
-        { id: 1, src: "/advertising/in_shop1.jpeg", alt: "In-Shop Display 1" },
-        { id: 2, src: "/advertising/in_shop2.jpeg", alt: "In-Shop Display 2" },
-        { id: 3, src: "/advertising/in_shop3.jpeg", alt: "In-Shop Display 3" },
-        { id: 4, src: "/advertising/in_shop4.jpeg", alt: "In-Shop Display 4" }
-      ]
-    },
-    {
-      id: 14,
-      title: "Exhibition Stalls",
-      description: "Creative exhibition booth designs",
-      category: "advertising",
-      subCategory: "Exhibition Creative Stalls",
-      photos: [
-        { id: 1, src: "/advertising/exhibition1.webp", alt: "Exhibition Stall 1" },
-        { id: 2, src: "/advertising/exhibition2.jpg", alt: "Exhibition Stall 2" },
-        { id: 3, src: "/advertising/exhibition3.jpg", alt: "Exhibition Stall 3" },
-        { id: 4, src: "/advertising/exhibition4.webp", alt: "Exhibition Stall 4" }
-      ]
-    },
-    {
-      id: 15,
-      title: "Hoarding Campaign",
-      description: "Large format outdoor advertising",
-      category: "advertising",
-      subCategory: "Unipoles & Hoardings",
-      photos: [
-        { id: 1, src: "/advertising/hoarding1.jpeg", alt: "Hoarding 1" },
-        { id: 2, src: "/advertising/hoarding2.jpeg", alt: "Hoarding 2" },
-        { id: 3, src: "/advertising/hoarding3.jpeg", alt: "Hoarding 3" },
-        { id: 4, src: "/advertising/hoarding4.jpeg", alt: "Hoarding 4" },
-        { id: 5, src: "/advertising/flex_banner1.jpeg", alt: "Flex Banner 1" },
-        { id: 6, src: "/advertising/flex_banner2.jpeg", alt: "Flex Banner 2" },
-        { id: 7, src: "/advertising/flex_banner3.jpeg", alt: "Flex Banner 3" },
-        { id: 8, src: "/advertising/flex_banner4.jpeg", alt: "Flex Banner 4" }
-      ]
-    },
-    {
-      id: 16,
-      title: "Corporate Events",
-      description: "Professional event production",
-      category: "advertising",
-      subCategory: "Corporate Event Production",
-      photos: [
-        { id: 1, src: "/advertising/corporate_event1.jpeg", alt: "Corporate Event 1" },
-        { id: 2, src: "/advertising/corporate_event2.jpeg", alt: "Corporate Event 2" },
-        { id: 3, src: "/advertising/corporate_event3.jpeg", alt: "Corporate Event 3" },
-        { id: 4, src: "/advertising/corporate_event4.jpeg", alt: "Corporate Event 4" }
-      ]
-    },
-    {
-      id: 17,
-      title: "Printing Services",
-      description: "Professional printing solutions",
-      category: "advertising",
-      subCategory: "Printing Segment Work",
-      photos: [
-        { id: 1, src: "/advertising/printing1.jpg", alt: "Printing Work 1" },
-        { id: 2, src: "/advertising/printing2.jpg", alt: "Printing Work 2" },
-        { id: 3, src: "/advertising/printing3.jpeg", alt: "Printing Work 3" },
-        { id: 4, src: "/advertising/printing4.webp", alt: "Printing Work 4" }
-      ]
-    },
-    {
-      id: 18,
-      title: "Leaflet Distribution",
-      description: "Marketing leaflets and pamphlets",
-      category: "advertising",
-      subCategory: "Leaflets & Pamphlets",
-      photos: [
-        { id: 1, src: "/advertising/leaflet1.jpeg", alt: "Leaflet Design 1" },
-        { id: 2, src: "/advertising/leaflet2.jpeg", alt: "Leaflet Design 2" },
-        { id: 3, src: "/advertising/leaflet3.jpeg", alt: "Leaflet Design 3" },
-        { id: 4, src: "/advertising/leaflet4.jpeg", alt: "Leaflet Design 4" }
-      ]
-    },
-    {
-      id: 19,
-      title: "Event Backdrops",
-      description: "Professional backdrop and standee solutions",
-      category: "advertising",
-      subCategory: "Backdrops, Standees & Kiosks",
-      photos: [
-        { id: 1, src: "/advertising/backdrop1.jpeg", alt: "Backdrop 1" },
-        { id: 2, src: "/advertising/backdrop2.jpeg", alt: "Backdrop 2" },
-        { id: 3, src: "/advertising/backdrop3.jpeg", alt: "Backdrop 3" },
-        { id: 4, src: "/advertising/backdrop4.jpeg", alt: "Backdrop 4" }
-      ]
-    },
-    {
-      id: 20,
-      title: "Parking Solutions",
-      description: "No parking boards and signage",
-      category: "advertising",
-      subCategory: "No Parking Boards",
-      photos: [
-        { id: 1, src: "/advertising/parking_board1.jpeg", alt: "Parking Board 1" },
-        { id: 2, src: "/advertising/parking_board2.jpeg", alt: "Parking Board 2" },
-        { id: 3, src: "/advertising/parking_board3.jpeg", alt: "Parking Board 3" },
-        { id: 4, src: "/advertising/parking_board4.jpeg", alt: "Parking Board 4" }
-      ]
-    },
-    {
-      id: 21,
-      title: "E-Rickshaw Advertising",
-      description: "Chroma advertising on E-Rickshaw",
-      category: "advertising",
-      subCategory: "E-Rickshaw & Mo Pad Bikes",
-      photos: [
-        { id: 1, src: "/advertising/e_rickshaw1.jpeg", alt: "E-Rickshaw Front" },
-        { id: 2, src: "/advertising/e_rickshaw2.jpeg", alt: "E-Rickshaw Side" },
-        { id: 3, src: "/advertising/e_rickshaw3.jpeg", alt: "E-Rickshaw Back" },
-        { id: 4, src: "/advertising/e_rickshaw4.jpeg", alt: "E-Rickshaw Detail" }
-      ]
-    },
-    {
-      id: 22,
-      title: "Internal Bus Branding",
-      description: "Internal Bus Branding",
-      category: "advertising",
-      subCategory: "Internal Bus Branding",
-      photos: [
-        { id: 1, src: "/advertising/internal_bus_branding1.jpeg", alt: "E-Rickshaw Front" },
-        { id: 2, src: "/advertising/internal_bus_branding2.jpeg", alt: "E-Rickshaw Side" },
-        { id: 3, src: "/advertising/internal_bus_branding3.jpeg", alt: "E-Rickshaw Back" },
-        { id: 4, src: "/advertising/internal_bus_branding4.jpeg", alt: "E-Rickshaw Detail" }
-      ]
-    },
-    {
-      id: 23,
-      title: "Shutter Painting",
-      description: "Shop Shutter Painting",
-      category: "advertising",
-      subCategory: "Shutter Painting",
-      photos: [
-        { id: 1, src: "/advertising/shutter_painting1.jpeg", alt: "Shutter Painting" },
-        { id: 2, src: "/advertising/shutter_painting2.jpeg", alt: "Shutter Paintinge" },
-        { id: 3, src: "/advertising/shutter_painting3.jpeg", alt: "Shutter Painting" },
-      ]
-    },
-    {
-      id: 24,
-      title: "GSB Board Campaign",
-      description: "Government and commercial GSB boards",
-      category: "advertising",
-      subCategory: "GSB Board",
-      photos: [
-        { id: 1, src: "/advertising/gsb_board1.jpeg", alt: "GSB Board 1" },
-        { id: 2, src: "/advertising/gsb_board2.jpeg", alt: "GSB Board 2" },
-        { id: 3, src: "/advertising/gsb_board3.jpeg", alt: "GSB Board 3" },
-        { id: 4, src: "/advertising/gsb_board4.jpeg", alt: "GSB Board 4" },
-        { id: 5, src: "/advertising/gsb_board5.jpeg", alt: "GSB Board 4" },
-        { id: 6, src: "/advertising/gsb_board6.jpeg", alt: "GSB Board 4" },
-        { id: 7, src: "/advertising/gsb_board7.jpeg", alt: "GSB Board 4" }
-      ]
-    },
-    {
-      id: 25,
-      title: "Temporary Hoarding",
-      description: "Construction site hoarding advertising",
-      category: "advertising",
-      subCategory: "Temporary Hoarding",
-      photos: [
-        { id: 1, src: "/advertising/temporary_hoarding1.jpeg", alt: "Temporary Hoarding 1" },
-        { id: 2, src: "/advertising/temporary_hoarding2.jpeg", alt: "Temporary Hoarding 2" },
-        { id: 3, src: "/advertising/temporary_hoarding3.jpeg", alt: "Temporary Hoarding 3" },
-        { id: 4, src: "/advertising/temporary_hoarding4.jpeg", alt: "Temporary Hoarding 4" },
-        { id: 5, src: "/advertising/temporary_hoarding5.jpeg", alt: "Temporary Hoarding 4" }
-      ]
-    },
-    {
-      id: 26,
-      title: "Cab Branding",
-      description: "Taxi and cab advertising solutions",
-      category: "advertising",
-      subCategory: "Cab Branding",
-      photos: [
-        { id: 1, src: "/advertising/cab_branding1.jpeg", alt: "Cab Branding Front" },
-        { id: 2, src: "/advertising/cab_branding2.jpeg", alt: "Cab Branding Side" },
-        { id: 3, src: "/advertising/cab_branding3.jpeg", alt: "Cab Branding Back" },
-        { id: 4, src: "/advertising/cab_branding4.jpeg", alt: "Cab Branding Interior" },
-        { id: 5, src: "/advertising/cab_branding5.jpeg", alt: "Cab Branding Interior" }
-      ]
+  // Fetch subcategories from API
+  const fetchSubCategories = async (category) => {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/api/gallery/subcategories/category/${category}`);
+      let subCategories = [];
+      
+      if (response.data.success && Array.isArray(response.data.data)) {
+        subCategories = response.data.data;
+      } else if (Array.isArray(response.data)) {
+        subCategories = response.data;
+      }
+      
+      // Extract names and sort by order if available
+      // Ensure we only get strings, filter out any undefined/null values
+      const subCategoryNames = subCategories
+        .filter(item => item && typeof item === 'object' && item.name && typeof item.name === 'string' && item.isActive !== false) // Filter active items with valid names
+        .sort((a, b) => (a.order || 0) - (b.order || 0)) // Sort by order
+        .map(item => String(item.name)) // Extract just the names as strings
+        .filter(name => name && name.trim() !== ''); // Remove any empty strings
+      
+      console.log('Subcategory names:', subCategoryNames); // Debug log
+      setAdvertisingSubCategories(subCategoryNames);
+    } catch (err) {
+      console.error('Error fetching subcategories:', err);
+      setAdvertisingSubCategories([]);
     }
-  ];
+  };
 
-  // Events Gallery Data
-  const eventsData = [
-    {
-      id: 27,
-      title: "Product Launch Event",
-      description: "Successful product launch with 500+ attendees",
-      category: "events",
-      photos: [
-        { id: 1, src: "/brand_activation/brand1.jpg", alt: "Product Launch" }
-      ]
-    },
-    {
-      id: 28,
-      title: "Corporate Conference",
-      description: "Annual corporate conference 2024",
-      category: "events",
-      photos: [
-        { id: 1, src: "/corporate/corporate1.webp", alt: "Corporate Conference" }
-      ]
-    },
-    {
-      id: 29,
-      title: "Charity Gala Night",
-      description: "Fundraising event for local community",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/cherity_gala.webp", alt: "Charity Gala" }
-      ]
-    },
-    {
-      id: 30,
-      title: "Tech Summit 2024",
-      description: "Leading technology conference",
-      category: "events",
-      photos: [
-        { id: 1, src: "/advertising/tech_confrance.webp", alt: "Tech Summit" }
-      ]
-    },
-    {
-      id: 31,
-      title: "10th Birthday Bash",
-      description: "Memorable birthday celebration event",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/bday.jpg", alt: "Birthday Event" }
-      ]
-    },
-    {
-      id: 32,
-      title: "Music Festival",
-      description: "3-day outdoor music festival",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/mirchi_music.jpg", alt: "Music Festival" }
-      ]
-    },
-    {
-      id: 33,
-      title: "Wedding Decor",
-      description: "Elegant wedding decoration setup",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event1.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 34,
-      title: "Wedding Decor",
-      description: "Beautiful wedding venue decoration",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event2.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 35,
-      title: "Wedding Decor",
-      description: "Traditional wedding setup",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event3.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 36,
-      title: "Wedding Decor",
-      description: "Modern wedding theme",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event4.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 37,
-      title: "Wedding Decor",
-      description: "Royal wedding decoration",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event5.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 38,
-      title: "Wedding Decor",
-      description: "Outdoor wedding setup",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event6.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 39,
-      title: "Wedding Decor",
-      description: "Intimate wedding ceremony",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event7.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 40,
-      title: "Wedding Decor",
-      description: "Grand wedding reception",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event8.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 41,
-      title: "Wedding Decor",
-      description: "Cultural wedding theme",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event9.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 42,
-      title: "Wedding Decor",
-      description: "Luxury wedding setup",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event10.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 43,
-      title: "Wedding Decor",
-      description: "Destination wedding decor",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/wedding_event11.jpeg", alt: "wedding decor" }
-      ]
-    },
-    {
-      id: 44,
-      title: "Product Launch Event",
-      description: "Innovative product showcase",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/product_launch1.jpeg", alt: "Product Launch Event" }
-      ]
-    },
-    {
-      id: 45,
-      title: "Product Launch Event",
-      description: "Corporate product unveiling",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/product_launch2.jpeg", alt: "Product Launch Event" }
-      ]
-    },
-    {
-      id: 46,
-      title: "Product Launch Event",
-      description: "Tech product demonstration",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/product_launch3.jpeg", alt: "Product Launch Event" }
-      ]
-    },
-    {
-      id: 47,
-      title: "Product Launch Event",
-      description: "Exclusive product preview",
-      category: "events",
-      photos: [
-        { id: 1, src: "/events/product_launch4.jpeg", alt: "Product Launch Event" }
-      ]
+  // Fetch gallery data from API
+  const fetchGalleryData = async (category = 'all') => {
+    setLoading(true);
+    setError(null);
+    try {
+      let url = `${API_BASE_URL}/api/gallery/active`;
+      if (category !== 'all') {
+        url = `${API_BASE_URL}/api/gallery/active?category=${category}`;
+      }
+      
+      const response = await axios.get(url);
+      
+      // Transform API response to match expected format
+      let transformedData = [];
+      if (response.data.success && Array.isArray(response.data.data)) {
+        transformedData = response.data.data.map((item, index) => ({
+          id: item._id || index + 1,
+          title: item.title || 'Untitled Project',
+          description: item.description || '',
+          category: item.category || category,
+          subCategory: item.subCategory || null,
+          photos: Array.isArray(item.photos) 
+            ? item.photos.map((photo, photoIndex) => {
+                let imageSrc = photo.src || photo.url || photo.image_url || '';
+                
+                // If src doesn't start with http/https, prepend the base URL
+                if (imageSrc && !imageSrc.startsWith('http')) {
+                  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL ;
+                  // Ensure baseURL doesn't end with / and imageSrc starts with /
+                  const cleanBaseURL = baseURL.replace(/\/$/, '');
+                  const cleanImageSrc = imageSrc.startsWith('/') ? imageSrc : `/${imageSrc}`;
+                  imageSrc = `${cleanBaseURL}${cleanImageSrc}`;
+                  console.log(imageSrc);
+                }
+                
+                return {
+                  id: photo._id || photoIndex + 1,
+                  src: imageSrc,
+                  alt: photo.alt || photo.title || `${item.title} - Photo ${photoIndex + 1}`
+                };
+              })
+            : []
+        }));
+      } else if (Array.isArray(response.data)) {
+        transformedData = response.data.map((item, index) => ({
+          id: item._id || item.id || index + 1,
+          title: item.title || 'Untitled Project',
+          description: item.description || '',
+          category: item.category || category,
+          subCategory: item.subCategory || null,
+          photos: Array.isArray(item.photos) 
+            ? item.photos.map((photo, photoIndex) => {
+                let imageSrc = photo.src || photo.url || photo.image_url || '';
+                
+                // If src doesn't start with http/https, prepend the base URL
+                if (imageSrc && !imageSrc.startsWith('http')) {
+                  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL || IMAGE_BASE_URL || '';
+                  // Ensure baseURL doesn't end with / and imageSrc starts with /
+                  const cleanBaseURL = baseURL.replace(/\/$/, '');
+                  const cleanImageSrc = imageSrc.startsWith('/') ? imageSrc : `/${imageSrc}`;
+                  imageSrc = `${cleanBaseURL}${cleanImageSrc}`;
+                }
+                
+                return {
+                  id: photo._id || photo.id || photoIndex + 1,
+                  src: imageSrc,
+                  alt: photo.alt || photo.title || `${item.title} - Photo ${photoIndex + 1}`
+                };
+              })
+            : []
+        }));
+      }
+      
+      setGalleryData(transformedData);
+    } catch (err) {
+      console.error('Error fetching gallery data:', err);
+      setError(err.message || 'Failed to load gallery data');
+      setGalleryData([]);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  // Combined gallery data
-  const galleryData = [...advertisingData, ...eventsData];
+  // Fetch data on component mount and when category changes
+  useEffect(() => {
+    fetchGalleryData(activeFilter === 'all' ? 'all' : activeFilter);
+  }, [activeFilter]);
 
+
+  // Calculate categories dynamically from API data
   const categories = [
     { id: 'all', label: 'All Projects', count: galleryData.length },
-    { id: 'advertising', label: 'Advertising', count: advertisingData.length },
-    { id: 'events', label: 'Events', count: eventsData.length }
+    { id: 'advertising', label: 'Advertising', count: galleryData.filter(item => item.category === 'advertising').length },
+    { id: 'events', label: 'Events', count: galleryData.filter(item => item.category === 'events').length }
   ];
 
   // Flatten projects into individual images for display in grid
   const getAllImagesForGrid = () => {
     const images = [];
     galleryData.forEach(project => {
+      if (project.photos && Array.isArray(project.photos)) {
       project.photos.forEach(photo => {
         images.push({
           ...photo,
@@ -621,6 +163,7 @@ const ModernGallery = () => {
           subCategory: project.subCategory
         });
       });
+      }
     });
     return images;
   };
@@ -649,6 +192,8 @@ const ModernGallery = () => {
     setActiveFilter(categoryId);
     if (categoryId === 'advertising') {
       setShowSubCategories(true);
+      // Only fetch subcategories when advertising button is clicked
+      fetchSubCategories('advertising');
     } else {
       setShowSubCategories(false);
       setActiveSubCategory('all');
@@ -710,112 +255,36 @@ const ModernGallery = () => {
   };
 
   const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.8
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15
-      }
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      transition: {
-        duration: 0.3
-      }
-    }
+    rest: { scale: 1 },
+    hover: { scale: 1.02 },
+    exit: { opacity: 0, scale: 0.8 }
   };
 
   const hoverVariants = {
-    rest: {
-      scale: 1,
-      y: 0
-    },
-    hover: {
-      scale: 1.05,
-      y: -8,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 25
-      }
-    }
+    rest: {},
+    hover: {}
   };
 
   const imageVariants = {
-    rest: { scale: 1 },
-    hover: { scale: 1.1 }
+    rest: {},
+    hover: {}
   };
 
   const overlayVariants = {
-    rest: { opacity: 0, y: 20 },
-    hover: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.3
-      }
-    }
-  };
-
-  const modalVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      rotateX: 15
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.5
-      }
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.8,
-      transition: {
-        duration: 0.3
-      }
-    }
+    rest: { opacity: 0 },
+    hover: { opacity: 1 }
   };
 
   const subCategoryVariants = {
-    hidden: {
-      opacity: 0,
-      height: 0,
-      y: -20
-    },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 25
-      }
-    },
-    exit: {
-      opacity: 0,
-      height: 0,
-      y: -20,
-      transition: {
-        duration: 0.3
-      }
-    }
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: 'auto' },
+    exit: { opacity: 0, height: 0 }
+  };
+
+  const modalVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: { scale: 1, opacity: 1 },
+    exit: { scale: 0.8, opacity: 0 }
   };
 
   return (
@@ -904,22 +373,27 @@ const ModernGallery = () => {
 
                 {/* Sub-category Grid - Responsive */}
                 <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-3 max-h-48 sm:max-h-64 md:max-h-74 overflow-y-auto">
-                  {advertisingSubCategories.map((subCategory, index) => (
-                    <motion.button
-                      key={subCategory}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => handleSubCategoryChange(subCategory)}
-                      className={`p-2 sm:p-3 rounded-lg md:rounded-xl text-left transition-all duration-300 border-2 ${activeSubCategory === subCategory
-                        ? 'bg-gradient-to-r from-primary to-tertiary text-white border-primary shadow-lg'
-                        : 'bg-white text-gray-700 border-gray-200 hover:border-primary/50 hover:shadow-md'
-                        }`}
-                    >
-                      <span className="text-xs font-medium leading-tight block">
-                        {subCategory}
-                      </span>
-                    </motion.button>
-                  ))}
+                  {advertisingSubCategories
+                    .filter(subCategory => typeof subCategory === 'string' && subCategory.trim() !== '')
+                    .map((subCategory, index) => {
+                      const subCategoryName = typeof subCategory === 'string' ? subCategory : String(subCategory?.name || subCategory || '');
+                      return (
+                        <motion.button
+                          key={`subcategory-${index}-${subCategoryName}`}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={() => handleSubCategoryChange(subCategoryName)}
+                          className={`p-2 sm:p-3 rounded-lg md:rounded-xl text-left transition-all duration-300 border-2 ${activeSubCategory === subCategoryName
+                            ? 'bg-gradient-to-r from-primary to-tertiary text-white border-primary shadow-lg'
+                            : 'bg-white text-gray-700 border-gray-200 hover:border-primary/50 hover:shadow-md'
+                            }`}
+                        >
+                          <span className="text-xs font-medium leading-tight block">
+                            {subCategoryName}
+                          </span>
+                        </motion.button>
+                      );
+                    })}
                 </div>
 
                 {/* Active Sub-category Indicator */}
@@ -949,7 +423,26 @@ const ModernGallery = () => {
           )}
         </AnimatePresence>
 
+        {/* Loading and Error States */}
+        {loading && (
+          <div className="text-center py-12 sm:py-16 md:py-20">
+            <div className="animate-spin inline-block w-10 h-10 border-4 border-primary border-t-transparent rounded-full mb-4"></div>
+            <p className="text-gray-600 text-lg">Loading gallery data...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="text-center py-12 sm:py-16 md:py-20">
+            <div className="text-red-500 text-6xl sm:text-7xl md:text-8xl mb-4 sm:mb-6">⚠️</div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-red-800 mb-3 sm:mb-4">Error loading data</h3>
+            <p className="text-red-600 text-base sm:text-lg max-w-md mx-auto px-4">
+              {error}. Please try again later.
+            </p>
+          </div>
+        )}
+
         {/* Gallery Grid - Responsive */}
+        {!loading && !error && filteredImages.length > 0 && (
         <motion.div
           ref={scrollRef}
           variants={containerVariants}
@@ -986,6 +479,7 @@ const ModernGallery = () => {
                       fill
                       className="object-cover"
                       sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        unoptimized={image.src?.startsWith('http')}
                     />
 
                     {/* Gradient Overlay */}
@@ -1040,6 +534,7 @@ const ModernGallery = () => {
             ))}
           </div>
         </motion.div>
+        )}
 
         {/* Image Modal - Responsive */}
         <AnimatePresence>
@@ -1116,6 +611,7 @@ const ModernGallery = () => {
                       fill
                       className="object-contain"
                       priority
+                      unoptimized={selectedImage.src?.startsWith('http')}
                     />
 
                     {/* Image Counter */}
@@ -1186,7 +682,7 @@ const ModernGallery = () => {
         </AnimatePresence>
 
         {/* Empty State - Responsive */}
-        {filteredImages.length === 0 && (
+        {!loading && !error && filteredImages.length === 0 && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -1205,7 +701,6 @@ const ModernGallery = () => {
       </div>
       <Footers />
     </>
-
   );
 };
 
